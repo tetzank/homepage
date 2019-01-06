@@ -1,0 +1,6 @@
+baseURL = "https://tetzank.github.io/"
+languageCode = "en-us"
+title = "Dangerous Assembly"
+
+disableLiveReload = true
+disableHugoGeneratorInject = true

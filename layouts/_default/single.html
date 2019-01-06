@@ -1,0 +1,30 @@
+{{ define "main" }}
+
+<main>
+	<article>
+		<header>
+        	<time datetime="{{ .PublishDate }}" class="catalogue-time">{{ .PublishDate.Format "2006-01-02" }}</time>
+			<h1>{{ .Title }}</h1>
+			<div class="post-line"></div>
+		</header>
+		<aside>
+			<details>
+				<summary>Contents</summary>
+				{{- .TableOfContents }}
+			</details>
+		</aside>
+		{{ .Content }}
+	</article>
+
+	<div class="pagination">
+		{{- if .PrevPage }}
+		<a href="{{ .PrevPage.URL }}" class="left arrow">&#8592;</a>
+		{{- end }}
+		<a href="#" class="top">Top</a>
+		{{- if .NextPage }}
+		<a href="{{ .NextPage.URL }}" class="right arrow">&#8594;</a>
+		{{- end }}
+	</div>
+</main>
+
+{{ end }}

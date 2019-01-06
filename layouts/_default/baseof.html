@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ .Title }}</title>
+
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+	<body>
+		<nav class="header">
+			<div class="header-container">
+				<a href="{{ "/" | relURL }}">
+					<h2>{{ .Site.Title }}</h2>
+				</a>
+				<!-- TODO: about page -->
+			</div>
+		</nav>
+
+		<div id="content">
+			{{- block "main" . }}{{- end }}
+		</div>
+	</body>
+</html>
