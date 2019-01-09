@@ -166,7 +166,7 @@ $ g++ -O2 -march=native -flto deadcode.cpp -o deadcode
 It sees that `unused()` is not called in any .cpp-file and removes it as dead code even with external linkage.
 
 Same as before, static libraries have to compiled with LTO enabled, otherwise the compiler cannot reason about it and remove unused code.
-But the main problem of LTO hindering its widespread adoption is very high memory usage and increased compilation time.
+But the main problem of LTO hindering its widespread adoption is high memory consumption and increased compilation time.
 The sequential step of linking is now also used to run optimization passes on bigger parts of the program.
 Linking is not trivially parallelizable like compiling .cpp-files to object files.
 Both, GCC and LLVM are working on improving scalability of LTO, e.g., LLVM with [ThinLTO][thinlto].
@@ -176,7 +176,7 @@ Both, GCC and LLVM are working on improving scalability of LTO, e.g., LLVM with 
 
 Coming back to our initial question if the compiler can safely remove unused code: yes, the compiler can do it if you ask in the right way.
 It is not done by simply enabling optimizations.
-LTO is the best variant in my opinion as it results in a lot of other optimizations applied to your program.
+LTO is the best variant in my opinion as it also enables a lot of other optimizations to be applied to your whole program.
 If you can tolerate the scalability issues of the compilation, LTO is the way to go.
 
 

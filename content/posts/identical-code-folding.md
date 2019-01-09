@@ -5,7 +5,7 @@ date: 2019-01-07T09:51:00+01:00
 
 Even more interesting than removing unused functions is consolidating identical instances of templated functions.
 For each template parameter, the compiler generates a new instance.
-In case of templated classes, we generate code per template parameter for every member function.
+In case of templated classes, it generates code per template parameter for every member function.
 The instances can have identical code, e.g., the member function is independent of the template parameters or the types are semantically equivalent for the applied operations.
 Let's see if we can minimize the code explosion by deduplicating code when it is identical.
 
@@ -34,7 +34,7 @@ void foo_first(){
 }
 {{< / highlight >}}
 
-second.cpp (nearly the same as above, `test()` differs slightly in the string):
+second.cpp (nearly the same as above, the string in `test()` is slightly modified):
 {{< highlight "C++" >}}
 #include <cstdio>
 
@@ -265,7 +265,7 @@ The member functions in `MyArray` get inlined as they are just forwarding.
 `MyArrayImpl` only gets instantiated once with size of 4 as `int` and `float` have the same size.
 
 This is not an ideal solution.
-Not every container can treat its elements as black boxes, e.g., containers storing elements in order to provide faster search need to compare elements.
+Not every container can treat its elements as black boxes, e.g., containers storing elements in a specific order to provide faster search need to compare elements.
 It gets hard to identify groups of types which behave identical considering the applied operations.
 An automatic solution would be much appreciated.
 
@@ -280,7 +280,7 @@ $ g++ -O2 -march=native -ffunction-sections -fuse-ld=gold -Wl,--icf=all myarray.
 The linker only works on the level of sections which means we have to put every function in its own section with the flag `-ffunction-sections`.
 Then, we have to use `ld.gold` as linker instead of the default `ld`.
 The flag `-fuse-ld=gold` changes the linker to gold.
-To enable the ICF pass, we pass `--icf=all` to the linker with the `-Wl,<linker-param>` flag.
+To enable the ICF pass, we pass `--icf=all` to the linker with the `-Wl,<linker-flag>` flag.
 
 {{< highlight bash >}}
 $ objdump -tC ./myarray | grep 'MyArray'
@@ -291,7 +291,7 @@ $ objdump -tC ./myarray | grep 'MyArray'
 {{< / highlight >}}
 
 Finally, we get the result we were looking for without modifications of the source code.
-Again, the symbol table still contains all instances, but the they point to shared code.
+Again, the symbol table still contains all instances, but they point to shared code.
 
 This also works with optimizations turned off for GCC.
 The gold linker fixes it all up for us, but it introduces a small size overhead in the executable as we have to put every function in its own section with `-ffunction-sections`.
