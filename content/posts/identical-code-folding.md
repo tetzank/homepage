@@ -144,7 +144,7 @@ It makes use of both member functions and instantiates the template for `int` an
 
 Let us compile and have a look at the functions in the resulting executable.
 
-{{< highlight txt >}}
+{{< highlight bash >}}
 $ g++ myarray.cpp -o myarray
 $ objdump -tC ./myarray | grep 'MyArray'
 000000000000125c  w    F .text  0000000000000023              MyArray<int, 1024>::operator[](unsigned int)
@@ -156,7 +156,7 @@ $ objdump -tC ./myarray | grep 'MyArray'
 As we expected, every member function gets instantiated per template parameter.
 Now, let us see if optimizations make a difference.
 
-{{< highlight txt >}}
+{{< highlight bash >}}
 $ g++ -O2 -march=native myarray.cpp -o myarray
 $ objdump -tC ./myarray | grep 'MyArray'
 00000000000011f0 l     F .text  0000000000000003              MyArray<int, 1024>::setMetaData(int) [clone .isra.0]
@@ -254,7 +254,7 @@ It gets the size of an element and the number of elements passed as template par
 It just forwards all calls to `MyArrayImpl` and reinterprets the stored bytes to the correct type.
 The code in `main` does not need to be changed.
 
-{{< highlight txt >}}
+{{< highlight bash >}}
 $ g++ -O2 -march=native myarray2.cpp -o myarray2
 $ objdump -tC ./myarray2 | grep 'MyArray'
 00000000000011f0 l     F .text  0000000000000003              MyArrayImpl<4, 1024>::setMetaData(int) [clone .isra.0]
