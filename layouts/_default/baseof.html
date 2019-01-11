@@ -3,7 +3,9 @@
 	<head>
 		<title>{{ .Title }}</title>
 
-		<link rel="stylesheet" href="/css/style.css">
+		{{ $options := (dict "targetPath" "css/style.css" "outputStyle" "compressed") }}
+		{{ $style := resources.Get "sass/main.scss" | resources.ToCSS $options }}
+		<link rel="stylesheet" href="{{ $style.RelPermalink }}">
 
 		{{ with .OutputFormats.Get "rss" -}}
 			{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
