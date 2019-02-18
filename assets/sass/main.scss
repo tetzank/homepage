@@ -15,6 +15,26 @@ main, .header-container {
 	margin: 0 auto;
 	max-width: 800px;
 	width: 80%;
+	position: relative;
+}
+
+.header-container {
+	&>a {
+		font-size: x-large;
+		font-weight: bold;
+	}
+
+	.header-menu {
+		font-size: medium;
+		float: right;
+		position: absolute;
+		top: 30%;
+		right: 0;
+
+		a {
+			margin: 5px;
+		}
+	}
 }
 
 .header {
