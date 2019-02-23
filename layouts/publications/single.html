@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+<main>
+	<article>
+		<header>
+			<h1>{{ .Title }}</h1>
+		</header>
+
+		{{ .Content }}
+
+		<hr/>
+		<div>
+		{{ range sort $.Site.Data.publications "index" "desc" }}
+			<div class="publication">
+				<h1>{{ .title }}</h1>
+				<p>{{ delimit .authors ", " }}</p>
+				<p>{{ .abstract }}</p>
+				<p>
+					{{ .conference }} {{ .year }},
+					DOI: <a href="https://doi.org/{{ .doi }}">[{{ .doi }}]</a>
+				</p>
+			</div>
+		{{ end }}
+		</div>
+	</article>
+</main>
+
+{{ end }}

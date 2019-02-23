@@ -1,0 +1,7 @@
+index: 1
+title: "Don't Walk Twice: Path Sharing for Regular Path Queries on Large Graphs"
+authors:
+  - Frank Tetzel
+conference: SIGMOD SRC
+year: 2017
+doi: 10.1145/3055167.3055173

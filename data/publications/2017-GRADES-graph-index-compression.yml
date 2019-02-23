@@ -1,0 +1,18 @@
+index: 2
+title: An Analysis of the Feasibility of Graph Compression Techniques for Indexing Regular Path Queries
+authors:
+  - Frank Tetzel
+  - Hannes Voigt
+  - Marcus Paradies
+  - Wolfgang Lehner
+conference: GRADES
+year: 2017
+abstract: >
+  Regular path queries (RPQs) are a fundamental part of recent graph query
+  languages like SPARQL and PGQL. They allow the definition of recursive path
+  structures through regular expressions in a declarative pattern matching
+  environment. We study the use of the K2-tree graph compression technique to
+  materialize RPQ results with low memory consumption for indexing. Compact
+  index representations enable the efficient storage of multiple indexes for
+  varying RPQs.
+doi: 10.1145/3078447.3078458
