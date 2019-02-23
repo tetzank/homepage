@@ -156,3 +156,12 @@ code { // inline code highlighting
 		right: 0;
 	}
 }
+
+img {
+	// center image horizontally
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	// rounded corners
+	border-radius: 15px;
+}

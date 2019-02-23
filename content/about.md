@@ -4,6 +4,8 @@ date: 2019-02-17T13:08:53+01:00
 type: static
 ---
 
+![portrait](/myself.jpg)
+
 Hello, World! My name is Frank Tetzel. I am a PhD student in Dresden, Germany,
 working in the field of databases, particularly graph databases.
 Other fields of interest include everything related to writing fast code,
