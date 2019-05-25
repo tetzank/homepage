@@ -18,11 +18,11 @@
 
 	<div class="pagination">
 		{{- if .PrevInSection }}
-		<a href="{{ .PrevInSection.URL }}" class="left arrow">&#8592; previous</a>
+		<a href="{{ .PrevInSection.Permalink }}" class="left arrow">&#8592; previous</a>
 		{{- end }}
 		<a href="#" class="top">Top</a>
 		{{- if .NextInSection }}
-		<a href="{{ .NextInSection.URL }}" class="right arrow">next &#8594;</a>
+		<a href="{{ .NextInSection.Permalink }}" class="right arrow">next &#8594;</a>
 		{{- end }}
 	</div>
 </main>
