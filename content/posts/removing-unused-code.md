@@ -8,14 +8,14 @@ Like many other C++ developers, my mental model of what the linker actually does
 But I'm always interested in learning new tricks about the tools I use regularly, especially new optimizations slumbering behind some obscure flag.
 In this post, we will have a look at the removal of unused functions from the executable and how the linker can help us with this task.
 
-Wait a minute. In a well maintained project there shouldn't be any unused function, right?
+Wait a minute. In a well-maintained project there shouldn't be any unused function, right?
 Well, it happens more often than you think that some function was left behind after some refactoring and nobody notices that it is not required anymore.
 And there's another important case: static linking.
 Usually a program which statically links another library is not using every function of the library.
-Only a subset of the functions are called.
+Only a subset of the functions is called.
 All other functions are unused.
 
-Surprisingly, a lot of C++ developers assume that todays optimizing compilers just take care of it.
+Surprisingly, a lot of C++ developers assume that today's optimizing compilers just take care of it.
 The compiler should be able to see that a function is never called and, therefore, exclude it from the executable.
 Let's put that to a test and see for ourselves.
 
@@ -47,7 +47,7 @@ $ g++ -O2 -march=native deadcode.cpp -o deadcode
 
 I will focus on "standard" tools running on Linux, mostly tools from GCC and binutils.
 You might get other results with different toolchains.
-I will usually check if clang+LLVM have a different behaviour and mention it, if they do.
+I will usually check if clang+LLVM have a different behavior and mention it, if they do.
 Here we use the C++ frontend `g++` of GCC.
 Compiling the program as C or C++ makes no real difference.
 
@@ -74,7 +74,7 @@ The answer is simple: it can't.
 We did not provide enough information to the compiler.
 For example, we know that there is just one .cpp-file and that we link it to a final program and not a library.
 Both things we did not tell the compiler explicitly.
-It gets more clear when we expand the one-liner we used for compilation to the commands which get run (simplified, pass `-v` to see the real commands).
+It gets clearer when we expand the one-liner we used for compilation to the commands which get run (simplified, pass `-v` to see the real commands).
 
 {{< highlight bash >}}
 $ g++ -O2 -march=native deadcode.cpp -o deadcode.o
@@ -165,7 +165,7 @@ $ g++ -O2 -march=native -flto deadcode.cpp -o deadcode
 `-flto` lets the compiler and its optimization passes see the whole program during linking.
 It sees that `unused()` is not called in any .cpp-file and removes it as dead code even with external linkage.
 
-Same as before, static libraries have to compiled with LTO enabled, otherwise the compiler cannot reason about it and remove unused code.
+Same as before, static libraries have to be compiled with LTO enabled, otherwise the compiler cannot reason about it and remove unused code.
 But the main problem of LTO hindering its widespread adoption is high memory consumption and increased compilation time.
 The sequential step of linking is now also used to run optimization passes on bigger parts of the program.
 Linking is not trivially parallelizable like compiling .cpp-files to object files.

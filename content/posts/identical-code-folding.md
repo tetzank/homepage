@@ -18,7 +18,7 @@ The linker assumes that all weak symbols with the same name have identical code.
 Therefore, it just picks the first one it encounters when searching for the symbol and copies the code only once into the executable.
 
 Normally, this works like a charm, but it can lead to subtle bugs when templates with the same name (in the same namespace and with the same template parameters) have different implementations.
-To make this more clear, let us take a small detour and look at the following example consisting of three source files.
+To make this clearer, let us take a small detour and look at the following example consisting of three source files.
 
 first.cpp:
 {{< highlight "C++" >}}
@@ -302,6 +302,6 @@ The gold linker can also be used for clang which does not provide any optimizati
 
 GCC with `-O2` can fold member functions which are independent of the template parameters to a single implementation.
 This only gets us half the way.
-It does not work for member functions which depend on template parameters, but happen to generate identical code.
+It does not work for member functions which depend on template parameters but happen to generate identical code.
 The gold linker provides an optimization pass to identify identical functions and let them share their code.
 An option also available to clang.

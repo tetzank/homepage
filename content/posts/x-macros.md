@@ -5,7 +5,7 @@ date: 2019-04-23T16:34:00+02:00
 
 A lot of C++ developers try to avoid preprocessor macros like the plague.
 There are genuine reasons for that.
-Macros might look like functions but they behave differently, resulting in confusing bugs when not treated carefully.
+Macros might look like functions, but they behave differently, resulting in confusing bugs when not treated carefully.
 But even in modern C++, macros still have their use cases.
 In this post, I want to talk about a special kind of macro called X-macro which is mostly used to generate various code fragments from a single list of elements.
 
@@ -29,7 +29,7 @@ What is the result of `SQUARE(i+1)`?
 In a function call, the expression `i+1` is evaluated at the call side and the resulting value passed as parameter to the function.
 Call-side evaluation of parameters is not happening for macros.[^1]
 [^1]: Parameters are macro-expanded at call side, see [Argument Prescan](https://gcc.gnu.org/onlinedocs/cpp/Argument-Prescan.html#Argument-Prescan).
-The whole parameter expression is inserted everywhere the parameter is used in the macro definition, resulting in `i+1 * i+1` which is not what we intented to calculate.
+The whole parameter expression is inserted everywhere the parameter is used in the macro definition, resulting in `i+1 * i+1` which is not what we intended to calculate.
 Operator precedence gets in our way.
 The fix is obvious: put everything in parentheses!
 
@@ -39,7 +39,7 @@ The fix is obvious: put everything in parentheses!
 
 The reason for this behavior is easy to understand: the preprocessor does not know anything about the semantics of the expressions.
 Basically, it just copies text around following its expansion rules, not knowing what the text means and if the assembled code makes any sense for the following compilation step.
-This separation of concerns keeps tools simple, but can lead to unexpected pitfalls.
+This separation of concerns keeps tools simple, but it can lead to unexpected pitfalls.
 If you feel curious about other common problems, you can check out the ['Macro Pitfalls'](https://gcc.gnu.org/onlinedocs/cpp/Macro-Pitfalls.html#Macro-Pitfalls) section in the documentation.
 
 I do not use macros as inlined functions anymore.
@@ -219,6 +219,6 @@ No more forgotten updates!
 
 I hope you do not get the impression that X-macros are limited to enums.
 I recently used X-macros to add a bit of metadata to classes and structures in such a way that I get a very simple compile-time reflection of their members.
-My list of elements were the members with their types.
+My list of elements was the members with their types.
 
 See also wikibooks for [more examples](https://en.wikibooks.org/wiki/C_Programming/Preprocessor#X-Macros).
