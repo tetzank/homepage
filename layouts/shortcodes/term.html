@@ -1,0 +1,3 @@
+{{$basename := .Get 0}}
+{{$file := printf "assets/term/%s/%s.html" $.Page.File.BaseFileName $basename }}
+<div class="term">{{ $file | readFile | safeHTML }}</div>

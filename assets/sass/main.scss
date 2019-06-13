@@ -109,31 +109,48 @@ pre, code {
 .highlight {
 	position: relative; // so that position absolute works for language name
 
-	&>* {
+	&>pre { // code highlighting in box
 		padding: .25em;
 		border-radius: 5px;
-	}
-}
-pre { // code highlighting in box
-	margin: 0;
+		margin: 0;
+		//background-color: #000 !important;
 
-	code {
-		background-color: transparent;
-		color: inherit;
-		padding: 0;
+		&>code {
+			background-color: transparent;
+			color: inherit;
+			padding: 0;
 
-		&::before{
-			content: attr(data-lang); // language name
-			position: absolute; // at top-right corner of code box
-			top: 1px;
-			right: 1px;
-			font-size: 10px;
-			color: #aaa;
-			padding: 2px 6px; // small box around in
-			background-color: #444;
+			&::before{
+				content: attr(data-lang); // language name
+				position: absolute; // at top-right corner of code box
+				top: 1px;
+				right: 1px;
+				font-size: 10px;
+				color: #aaa;
+				padding: 2px 6px; // small box around in
+				background-color: #444;
+			}
 		}
 	}
 }
+
+.term>div {
+	padding: .25em;
+	border-radius: 5px;
+}
+
+pre { // without code highlighting
+	background-color: #272822;
+	padding: .25em;
+	border-radius: 5px;
+
+	code {
+		background-color: transparent;
+		color: #f8f8f2;
+		padding: 0;
+	}
+}
+
 code { // inline code highlighting
 	background-color: #f9f9f9;
 	color: #e52633;
