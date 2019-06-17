@@ -293,13 +293,28 @@ That's all it takes to allocate memory on the stack.
 There are no further instructions manipulating the stack until we reach the exploitable call to _fgets_.
 Hence, we end up with the following stack layout.
 
-`32 byte buffer + 8 byte rbp + 8 byte return address`
 
-{{< todo >}}
-<svg version="1.1" width="100%" height="50" xmlns="http://www.w3.org/2000/svg">
-<rect width="100%" height="20" stroke="black" stroke-width="4" fill="none" />
+<svg version="1.1" width="320" height="100" style="display:block;margin-left:auto;margin-right:auto;" xmlns="http://www.w3.org/2000/svg">
+<g stroke="black" fill="none" stroke-width="2">
+<path d="M1 30 h300 v30 h-300 Z m200 0 v30 m50 0 v-30 m50 0 h20 m0 30 h-20"/>
+<path d="M273 83 v-15 m4 0 v15 m5 -10 l-7 -7 l-7 7" stroke="red"/>
+</g>
+<g text-anchor="middle">
+<text x="5" y="20">0</text>
+<text x="50" y="20">8</text>
+<text x="100" y="20">16</text>
+<text x="150" y="20">24</text>
+<text x="200" y="20">32</text>
+<text x="250" y="20">40</text>
+<text x="300" y="20">48</text>
+<text x="100" y="50">buffer</text>
+<text x="225" y="50">rbp</text>
+<text x="275" y="50">reta</text>
+<text x="312" y="50">...</text>
+<text x="275" y="100">0x400811</text>
+</g>
 </svg>
-{{< / todo >}}
+
 
 That means we need to fill up the buffer with 32 bytes of garbage, write additionally 8 bytes for `rbp` and then, finally, overwrite the return address with the address of _ret2win_.
 We end up with 48 bytes of input data we have to pipe into the challenge program.
@@ -466,6 +481,37 @@ We can search for ROP gadgets with the `/R` command.
 
 That is exactly what we were looking for.
 Let's put it all together.
+
+
+<svg version="1.1" width="420" height="120" style="display:block;margin-left:auto;margin-right:auto;" xmlns="http://www.w3.org/2000/svg">
+<g stroke="black" fill="none" stroke-width="2">
+<path d="M1 30 h400 v30 h-400 Z m200 0 v30 m50 0 v-30 m50 0 v30 m50 0 v-30 m50 0 h20 m0 30 h-20"/>
+<path d="M273 83 v-15 m4 0 v15 m5 -10 l-7 -7 l-7 7" stroke="red"/>
+<path d="M323 103 v-35 m4 0 v35 m5 -30 l-7 -7 l-7 7" stroke="red"/>
+<path d="M373 83 v-15 m4 0 v15 m5 -10 l-7 -7 l-7 7" stroke="red"/>
+</g>
+<g text-anchor="middle">
+<text x="5" y="20">0</text>
+<text x="50" y="20">8</text>
+<text x="100" y="20">16</text>
+<text x="150" y="20">24</text>
+<text x="200" y="20">32</text>
+<text x="250" y="20">40</text>
+<text x="300" y="20">48</text>
+<text x="350" y="20">56</text>
+<text x="400" y="20">64</text>
+<text x="100" y="50">buffer</text>
+<text x="225" y="50">rbp</text>
+<text x="275" y="50">reta</text>
+<text x="325" y="50">(pop)</text>
+<text x="375" y="50">(ret)</text>
+<text x="412" y="50">...</text>
+<text x="275" y="100">0x400883</text>
+<text x="325" y="120">0x601060</text>
+<text x="375" y="100">0x400810</text>
+</g>
+</svg>
+
 
 _pwnme_ still has the same vulnerability.
 We fill up the stack buffer with 32 bytes of garbage, followed by 8 bytes for the stored `rbp` register.
