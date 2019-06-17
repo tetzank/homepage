@@ -62,23 +62,23 @@ int main(){
 
 The program output varies depending on which order the linker gets to know the symbols.
 
-{{< highlight bash >}}
+```
 $ g++ main.cpp first.cpp second.cpp -o main && ./main
 test in first.cpp called
 test in first.cpp called
 $ g++ main.cpp second.cpp first.cpp -o main && ./main
 test in second.cpp called
 test in second.cpp called
-{{< / highlight >}}
+```
 
 If we turn on optimizations, the call to `test()` in `foo_first()` and `foo_second()` gets inlined, picking `test()` from the same file.
 Hence, we get the expected output.
 
-{{< highlight bash >}}
+```
 $ g++ -O2 main.cpp first.cpp second.cpp -o main && ./main
 test in first.cpp called
 test in second.cpp called
-{{< / highlight >}}
+```
 
 As with other classes and functions, never have different implementations with the same name.
 Normally, you get a linker error (multiple definitions), but not for templates.
@@ -144,26 +144,26 @@ It makes use of both member functions and instantiates the template for `int` an
 
 Let us compile and have a look at the functions in the resulting executable.
 
-{{< highlight bash >}}
+```
 $ g++ myarray.cpp -o myarray
 $ objdump -tC ./myarray | grep 'MyArray'
 000000000000125c  w    F .text  0000000000000023              MyArray<int, 1024>::operator[](unsigned int)
 0000000000001244  w    F .text  0000000000000017              MyArray<float, 1024>::setMetaData(int)
 000000000000122c  w    F .text  0000000000000017              MyArray<int, 1024>::setMetaData(int)
 0000000000001280  w    F .text  0000000000000023              MyArray<float, 1024>::operator[](unsigned int)
-{{< / highlight >}}
+```
 
 As we expected, every member function gets instantiated per template parameter.
 Now, let us see if optimizations make a difference.
 
-{{< highlight bash >}}
+```
 $ g++ -O2 -march=native myarray.cpp -o myarray
 $ objdump -tC ./myarray | grep 'MyArray'
 00000000000011f0 l     F .text  0000000000000003              MyArray<int, 1024>::setMetaData(int) [clone .isra.0]
 00000000000011f0 l     F .text  0000000000000003              MyArray<float, 1024>::setMetaData(int) [clone .isra.1]
 0000000000001200  w    F .text  0000000000000008              MyArray<int, 1024>::operator[](unsigned int)
 0000000000001210  w    F .text  0000000000000008              MyArray<float, 1024>::operator[](unsigned int)
-{{< / highlight >}}
+```
 
 If we look carefully (ignoring the different order), we notice that the first column is now the same for the two instances of `setMetaData()`.
 This is the address of the function in the executable.
@@ -178,15 +178,15 @@ Maybe the assumption, that the code is identical, is not correct.
 We can disassemble the code with `objdump -DC` and search for the functions.
 Another option is to use `gdb` and its `disassemble` command, but we have to use mangled names.
 
-{{< highlight bash >}}
+```
 $ gdb -nx -batch -ex 'disassemble _ZN7MyArrayIfLi1024EEixEj' ./myarray
-{{< / highlight >}}
+```
 
 If we enable debug information during compilation, we can also use function signatures[^2].
 
 [^2]: Another option is to use breakpoints: `gdb -nx -batch -ex 'b MyArray<int,1024>::operator[](unsigned int)' -ex 'r' -ex 'disassemble' ./myarray`
 
-{{< highlight bash >}}
+```
 $ g++ -g -O2 -march=native myarray.cpp -o myarray
 $ gdb -nx -batch -ex 'disassemble MyArray<int,1024>::operator[](unsigned)' ./myarray 
 Dump of assembler code for function MyArray<int, 1024>::operator[](unsigned int):
@@ -200,7 +200,7 @@ Dump of assembler code for function MyArray<float, 1024>::operator[](unsigned in
    0x0000000000001212 <+2>:     lea    0x4(%rdi,%rsi,4),%rax
    0x0000000000001217 <+7>:     retq   
 End of assembler dump.
-{{< / highlight >}}
+```
 
 Even if you cannot read x86 assembly, you can clearly see that these two functions are identical.
 
@@ -254,12 +254,12 @@ It gets the size of an element and the number of elements passed as template par
 It just forwards all calls to `MyArrayImpl` and reinterprets the stored bytes to the correct type.
 The code in `main` does not need to be changed.
 
-{{< highlight bash >}}
+```
 $ g++ -O2 -march=native myarray2.cpp -o myarray2
 $ objdump -tC ./myarray2 | grep 'MyArray'
 00000000000011f0 l     F .text  0000000000000003              MyArrayImpl<4, 1024>::setMetaData(int) [clone .isra.0]
 0000000000001200  w    F .text  0000000000000009              MyArrayImpl<4, 1024>::operator[](unsigned int)
-{{< / highlight >}}
+```
 
 The member functions in `MyArray` get inlined as they are just forwarding.
 `MyArrayImpl` only gets instantiated once with size of 4 as `int` and `float` have the same size.
@@ -273,22 +273,22 @@ The linker to the rescue!
 When studying the manpage of GCC and its flag `-fipa-icf`, one gets to know that the gold linker has a similar optimization pass providing ICF.
 Time to put it to a test.
 
-{{< highlight bash >}}
+```
 $ g++ -O2 -march=native -ffunction-sections -fuse-ld=gold -Wl,--icf=all myarray.cpp -o myarray
-{{< / highlight >}}
+```
 
 The linker only works on the level of sections which means we have to put every function in its own section with the flag `-ffunction-sections`.
 Then, we have to use `ld.gold` as linker instead of the default `ld`.
 The flag `-fuse-ld=gold` changes the linker to gold.
 To enable the ICF pass, we pass `--icf=all` to the linker with the `-Wl,<linker-flag>` flag.
 
-{{< highlight bash >}}
+```
 $ objdump -tC ./myarray | grep 'MyArray'
 0000000000000730 l     F .text  0000000000000003              MyArray<int, 1024>::setMetaData(int) [clone .isra.0]
 0000000000000730 l     F .text  0000000000000003              MyArray<float, 1024>::setMetaData(int) [clone .isra.1]
 0000000000000740  w    F .text  0000000000000008              MyArray<int, 1024>::operator[](unsigned int)
 0000000000000740  w    F .text  0000000000000008              MyArray<float, 1024>::operator[](unsigned int)
-{{< / highlight >}}
+```
 
 Finally, we get the result we were looking for without modifications of the source code.
 Again, the symbol table still contains all instances, but they point to shared code.

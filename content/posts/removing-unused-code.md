@@ -41,9 +41,9 @@ It just returns the return code of 0, nothing more.
 Obviously, the function `unused()` is never called.
 Let's compile it with optimizations turned on.
 
-{{< highlight bash >}}
+```
 $ g++ -O2 -march=native deadcode.cpp -o deadcode
-{{< / highlight >}}
+```
 
 I will focus on "standard" tools running on Linux, mostly tools from GCC and binutils.
 You might get other results with different toolchains.
@@ -56,10 +56,10 @@ Compiling the program as C or C++ makes no real difference.
 
 Now that we have an executable, let's have a look if `unused()` survived all the optimization passes of the compiler and made its way into the executable.
 
-{{< highlight bash >}}
+```
 $ objdump -tC deadcode | grep 'unused'
 0000000000001150 g     F .text  000000000000000c              unused()
-{{< / highlight >}}
+```
 
 `objdump` should be your goto tool if you want to inspect an executable.
 We are interested in the functions contained in the executable.
@@ -76,10 +76,10 @@ For example, we know that there is just one .cpp-file and that we link it to a f
 Both things we did not tell the compiler explicitly.
 It gets clearer when we expand the one-liner we used for compilation to the commands which get run (simplified, pass `-v` to see the real commands).
 
-{{< highlight bash >}}
+```
 $ g++ -O2 -march=native deadcode.cpp -o deadcode.o
 $ g++ deadcode.o -o deadcode
-{{< / highlight >}}
+```
 
 First, all .cpp-files are compiled to object files, isolated from each other in their own process.
 Afterwards, all object files are linked together to the executable.
@@ -118,9 +118,9 @@ Hence, the function is unreachable and removed as dead code.
 
 Instead of changing the file by hand, we can use a special flag of GCC.
 
-{{< highlight bash >}}
+```
 $ g++ -O2 -march=native -fwhole-program deadcode.cpp -o deadcode
-{{< / highlight >}}
+```
 
 `-fwhole-program` lets the compiler assume that there is just one .cpp-file and, therefore, set every function except main to internal linkage.
 This will remove `unused()` without any source changes.
@@ -137,9 +137,9 @@ The only tool which has the full picture is the linker.
 It knows all object files and all libraries involved in the compilation.
 We have to instruct it explicitly to remove unused code.
 
-{{< highlight bash >}}
+```
 $ g++ -O2 -march=native -ffunction-sections -Wl,--gc-sections deadcode.cpp -o deadcode
-{{< / highlight >}}
+```
 
 `-ffunction-sections` puts every function in its own ELF section.
 The linker only sees sections as a black box.
@@ -158,9 +158,9 @@ As we learned, the linker is in a nice position to see every part of a program.
 Many optimization passes, not just dead code elimination, benefit from a bigger picture of the program.
 Therefore, modern compilers and linkers provide link-time optimization (LTO).
 
-{{< highlight bash >}}
+```
 $ g++ -O2 -march=native -flto deadcode.cpp -o deadcode
-{{< / highlight >}}
+```
 
 `-flto` lets the compiler and its optimization passes see the whole program during linking.
 It sees that `unused()` is not called in any .cpp-file and removes it as dead code even with external linkage.

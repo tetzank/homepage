@@ -16,9 +16,9 @@ When I started developing in C/C++, I used macros as constants and small inlined
 This works for simple expressions, if one writes the macro carefully, but not for code fragments consisting of multiple statements.
 Here is a simple expression macro squaring a passed value:
 
-{{< highlight "C++" >}}
+```
 #define SQUARE(value) value * value
-{{< / highlight >}}
+```
 
 The macro is expanded to the passed value multiplied by itself.
 Looks easy enough.
@@ -33,9 +33,9 @@ The whole parameter expression is inserted everywhere the parameter is used in t
 Operator precedence gets in our way.
 The fix is obvious: put everything in parentheses!
 
-{{< highlight "C++" >}}
+```
 #define SQUARE(expr) ((expr) * (expr))
-{{< / highlight >}}
+```
 
 The reason for this behavior is easy to understand: the preprocessor does not know anything about the semantics of the expressions.
 Basically, it just copies text around following its expansion rules, not knowing what the text means and if the assembled code makes any sense for the following compilation step.
