@@ -18,7 +18,7 @@ We will only look at four instructions which are relevant for function calls and
 That's all we will need for the moment.
 
 Function support is provided by two instructions at the assembly level: `call` and `ret`.
-The `call` instructions takes the address of a function as an operand, either as a fixed address as part of the instruction encoding (immediate) or as a register holding the address (indirect call).
+The `call` instruction takes the address of a function as an operand, either as a fixed address as part of the instruction encoding (immediate) or as a register holding the address (indirect call).
 The latter one is used, among others, for virtual function calls as the address of the callee is not known at compile-time.
 There are two operations `call` does.
 
@@ -35,10 +35,10 @@ There, the first six parameters are passed in `rdi`, `rsi`, `rdx`, `rcx`, `r8` a
 Any additional parameter is passed on the stack.
 The callee assumes the caller adheres to the calling convention and uses the registers representing the parameters accordingly.
 
-The `ret` instruction has to jump back to wherever the function call originated.
+The `ret` instruction has to jump back to wherever the function call originated from.
 That is where the return address comes into play.
 `ret` pops the address from the top of the stack where the previous `call` left it and transfers control flow back to the caller.
-How the return value is transfered to the caller is again specified by the calling convention.
+How the return value is transferred to the caller is again specified by the calling convention.
 It is usually in the register `rax`.
 The important thing to note here is that `ret` always gets the address to jump to from the top of the stack.
 
@@ -67,16 +67,16 @@ Whatever the address on top of the stack is, `ret` will jump to it.
 If an attacker can overwrite this memory location, he can redirect control flow to an address of his liking.
 And today, we are playing attacker.
 
-But first, let's step back a little and let us analyse the executable we got.
-We will focus on the 64 bit version and mostly use
+But first, let's step back a little and let us analyze the executable we got.
+We will focus on the 64-bit version and mostly use
 [Radare2 (r2)](https://radare.org/)
-to analyse it.
+to analyze it.
 `r2` is a very powerful reverse engineering tool.
 Hence, it is quite complex.
 We will take it step by step.
 
 
-We load the program into `r2`, and get greeted by a fortune and a command prompt.
+We load the program into `r2` and get greeted by a fortune and a command prompt.
 The first useful command is `i` which extracts general information from the opened file.
 
 {{% term "ret2win-i" %}}
@@ -129,11 +129,11 @@ va       true
 
 Commands in `r2` are categorized and structured in a command tree.
 Short sequences of characters are used to navigate the tree, each character representing an option we picked.
-For example, to get more detailed informations about the executable like the list of symbols, we use the command `is`, extending the command for general information `i`.
+For example, to get more detailed information about the executable like the list of symbols, we use the command `is`, extending the command for general information `i`.
 You can get a list of available options by adding a question mark at the end, e.g., `i?` or just `?` to get the top-level commands and other helpful explanations.
 
 The list of symbols might be quite long.
-We can filter the output of a command with the tilde `~` operator which is a builtin `grep`.
+We can filter the output of a command with the tilde `~` operator which works like a built-in `grep`.
 Filtering for symbols belonging to functions:
 
 {{% term "ret2win-funcs" %}}
@@ -180,9 +180,9 @@ We can also chain filters:
 Two functions stand out because of their suspicious names: _pwnme_ and _ret2win_.
 Let us have a look at _pwnme_ first.
 We seek to the function with `s 0x004007b5`.
-Next, we analyse the function with `af` which among others determines the function boundaries.
+Next, we analyze the function with `af` which among others determines the function boundaries.
 From the symbol table we only got the entry point of the function.
-With the boundaries analysed, we can print the disassembly of the function with `pdf`.
+With the boundaries analyzed, we can print the disassembly of the function with `pdf`.
 The last two commands work implicitly with the current position.
 
 {{% term "ret2win-pwnme" %}}
@@ -304,7 +304,7 @@ Hence, we end up with the following stack layout.
 That means we need to fill up the buffer with 32 bytes of garbage, write additionally 8 bytes for `rbp` and then, finally, overwrite the return address with the address of _ret2win_.
 We end up with 48 bytes of input data we have to pipe into the challenge program.
 It does not matter how you create the input file.
-You could just use a hexeditor and type it in, or write a little program to create the file.
+You could just use a hex editor and type it in, or write a little program to create the file.
 Here's a C program which does that.
 
 {{< highlight C >}}
@@ -360,7 +360,7 @@ The first challenge was just a warm-up, teaching you how to redirect control flo
 The [second challenge 'split'](https://ropemporium.com/challenge/split.html)
 teaches us more concepts of return oriented programming, particularly the usage of gadgets and how to chain them together to perform arbitrary operations.
 
-Let us start by analysing the executable file we got.
+Let us start by analyzing the executable file we got.
 First, we extract the list of functions residing in the binary.
 
 {{% term "split-funcs" %}}
@@ -440,7 +440,7 @@ A memory page can be writable or executable, but not both.
 The policy is not strictly followed everywhere but for the stack it is.
 The stack memory is obviously writable to store local variables and return addresses, but it does not need to be executable as it just contains data.
 We can check with `i~nx` if the stack is non-executable.
-On a modern linux system it should be.
+On a modern Linux system, it should be.
 
 The memory page containing the program instructions is executable but not writable, which prevents us from manipulating the program code.
 We can still redirect control flow anywhere we want and therefore execute any code in the program and its library dependencies.
@@ -477,7 +477,7 @@ Alternatively, we can jump directly to _system_ by getting its address with `is~
 
 ROP is all about sequencing precise jumps to execute a few instructions and jump on.
 Kind of bunny hopping all over the executable code of a program.
-With enough executable code available it is turing complete, i.e., any possible calculation can be performed.
+With enough executable code available it is Turing complete, i.e., any possible calculation can be performed.
 The C standard library "libc" is big enough and used by a lot of central components of most operating systems.
 
 Here's a C program creating the input file.
@@ -525,8 +525,8 @@ Segmentation fault (core dumped)
 ```
 
 With the second challenge beaten you can check out the other challenges.
-I had a lot of fun piecing the puzzles together and it teached me a lot about the execution flow of a program, especially how function calls into a shared library really work.
-I encourage you to have a look.
+I had a lot of fun piecing the puzzles together and learned a bunch of new things about the low-level execution flow of a program, especially how function calls into a shared library really work.
+I encourage you to have a look at the other challenges.
 
 
 # ROP Mitigations
@@ -537,7 +537,7 @@ A general technique to detect stack buffer overflows and prevent overwriting of 
 A canary value chosen randomly at program start gets written right on top of return address of a function.
 Before the function returns, the canary value is checked to be unchanged.
 An attacker trying to overwrite the return address has to overwrite the canary value as well, with the same value which was there before.
-Most compilers support somekind of stack protection like this.
+Most compilers support some kind of stack protection like this.
 The compilation flag in GCC is `-fstack-protector` to protect only "larger" functions which limits the negative performance impact, or `-fstack-protector-all` to protect all functions.
 The ROP Emporium challenges have it disabled (`i~canary`).
 
@@ -563,7 +563,7 @@ This should limit the number of useful gadgets.
 
 It requires compiler support which landed in GCC 8.
 And even more importantly, CPUs supporting this feature.
-I am not aware of any CPU being sold today that support it.
+I am not aware of any CPU being sold today that supports it.
 Something to keep in mind for the future, I guess.
 In the meantime, one might try Clang's [SafeStack](https://clang.llvm.org/docs/SafeStack.html) which implements a shadow stack as well but works on today's CPUs.
 
