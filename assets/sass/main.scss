@@ -137,6 +137,8 @@ pre, code {
 .term>div {
 	padding: .25em;
 	border-radius: 5px;
+	overflow: auto;
+	white-space: nowrap;
 }
 
 pre { // without code highlighting

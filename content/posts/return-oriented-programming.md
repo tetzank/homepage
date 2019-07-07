@@ -26,7 +26,7 @@ There are two operations `call` does.
    This will be the location where the program continues execution after the function call (return address).
 2. It jumps to the address provided by the operand which transfers control flow to the callee.
 
-Notice, that `call` does not handle any function parameter.
+Notice that `call` does not handle any function parameters.
 They are passed in registers, and on the stack if a function has a lot of parameters.
 The calling convention of the operating system specifies which registers have to be used by a conforming compiler.
 Wikipedia has a nice [overview](https://en.wikipedia.org/wiki/X86_calling_conventions#List_of_x86_calling_conventions) of the various calling conventions.
@@ -316,7 +316,7 @@ Hence, we end up with the following stack layout.
 </svg>
 
 
-That means we need to fill up the buffer with 32 bytes of garbage, write additionally 8 bytes for `rbp` and then, finally, overwrite the return address with the address of _ret2win_.
+That means we need to fill up the buffer with 32 bytes of garbage, write additionally 8 bytes for `rbp` and then, finally, overwrite the return address with the address of _ret2win_ `0x00400811`.
 We end up with 48 bytes of input data we have to pipe into the challenge program.
 It does not matter how you create the input file.
 You could just use a hex editor and type it in, or write a little program to create the file.
