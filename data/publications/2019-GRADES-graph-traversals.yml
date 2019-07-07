@@ -1,0 +1,22 @@
+index: 4
+title: Graph Traversals for Regular Path Queries
+authors:
+  - Frank Tetzel
+  - Romans Kasperovics
+  - Wolfgang Lehner
+conference: GRADES-NDA
+year: 2019
+abstract: >
+  Regular Path Queries (RPQs) are at the core of many recent declarative graph
+  pattern matching languages. They leverage the compactness and expressiveness
+  of regular expressions for matching recursive path structures. Unfortunately,
+  most prior works on RPQs only consider breadth-first search as traversal
+  strategy, neglecting other possible graph traversals like depth-first search
+  or a combination of both. Within this paper, we conduct an analysis of graph
+  traversals for RPQs by introducing a generalized graph traversal framework
+  subsuming breadth-first search and depth-first search as extreme cases and
+  thus opening up a new design space for graph traversal algorithms. We outline
+  the underlying principles as well as provide comprehensive experimental
+  evaluation using implementations which yield beneficial results regarding
+  evaluation time and peak memory consumption.
+doi: 10.1145/3327964.3328494
