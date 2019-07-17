@@ -294,9 +294,10 @@ There are no further instructions manipulating the stack until we reach the expl
 Hence, we end up with the following stack layout.
 
 
-<svg version="1.1" width="320" height="100" style="display:block;margin-left:auto;margin-right:auto;" xmlns="http://www.w3.org/2000/svg">
+<svg version="1.1" width="320" height="110" xmlns="http://www.w3.org/2000/svg">
 <g stroke="black" fill="none" stroke-width="2">
 <path d="M1 30 h300 v30 h-300 Z m200 0 v30 m50 0 v-30 m50 0 h20 m0 30 h-20"/>
+<path d="M1 65 c0 20,120 0,125 20 c5 -20,125 0,125 -20" stroke="red"/>
 <path d="M273 83 v-15 m4 0 v15 m5 -10 l-7 -7 l-7 7" stroke="red"/>
 </g>
 <g text-anchor="middle">
@@ -311,6 +312,7 @@ Hence, we end up with the following stack layout.
 <text x="225" y="50">rbp</text>
 <text x="275" y="50">reta</text>
 <text x="312" y="50">...</text>
+<text x="125" y="100">garbage</text>
 <text x="275" y="100">0x400811</text>
 </g>
 </svg>
@@ -483,9 +485,10 @@ That is exactly what we were looking for.
 Let's put it all together.
 
 
-<svg version="1.1" width="420" height="120" style="display:block;margin-left:auto;margin-right:auto;" xmlns="http://www.w3.org/2000/svg">
+<svg version="1.1" width="420" height="120" xmlns="http://www.w3.org/2000/svg">
 <g stroke="black" fill="none" stroke-width="2">
 <path d="M1 30 h400 v30 h-400 Z m200 0 v30 m50 0 v-30 m50 0 v30 m50 0 v-30 m50 0 h20 m0 30 h-20"/>
+<path d="M1 65 c0 20,120 0,125 20 c5 -20,125 0,125 -20" stroke="red"/>
 <path d="M273 83 v-15 m4 0 v15 m5 -10 l-7 -7 l-7 7" stroke="red"/>
 <path d="M323 103 v-35 m4 0 v35 m5 -30 l-7 -7 l-7 7" stroke="red"/>
 <path d="M373 83 v-15 m4 0 v15 m5 -10 l-7 -7 l-7 7" stroke="red"/>
@@ -506,6 +509,7 @@ Let's put it all together.
 <text x="325" y="50">(pop)</text>
 <text x="375" y="50">(ret)</text>
 <text x="412" y="50">...</text>
+<text x="125" y="100">garbage</text>
 <text x="275" y="100">0x400883</text>
 <text x="325" y="120">0x601060</text>
 <text x="375" y="100">0x400810</text>
