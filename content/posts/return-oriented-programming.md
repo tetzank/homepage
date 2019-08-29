@@ -220,6 +220,12 @@ The last two commands work implicitly with the current position.
 ```
 {{< / todo >}}
 
+The first column is the address of the instruction.
+Next, we see the opcode, the encoding of the instruction and its operands in hexadecimal, followed by the disassembly which we humans prefer to read.
+Last, we see some helpful comments in red which the analysis run in `r2` added for us, like the signatures of the called functions.
+{{< todo >}}
+Notice, that the opcodes vary in size.
+{{< / todo >}}
 
 Well, now we just have to understand the assembly.
 The function consists mostly of function calls to _memset_, _puts_, _printf_ and _fgets_.

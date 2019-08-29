@@ -157,7 +157,7 @@ The definition is the following:
 	};
 {{< / highlight >}}
 
-During the expansion of `DECLARE_ENUM()` two nested expansion are triggered one after the other.
+During the expansion of `DECLARE_ENUM()` two nested expansions are triggered one after the other.
 First, the list of elements `COLORS` is inserted into the enum and the array, replacing ELEMENTS.
 
 {{< highlight "C++" >}}
