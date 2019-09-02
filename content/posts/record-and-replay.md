@@ -31,7 +31,7 @@ int main(){
 }
 {{< / highlight >}}
 
-This program does not compute anything at all but it has a simple bug which illustrates the benefits of being able to step backwards in the program execution flow.
+This program does not compute anything at all, but it has a simple bug which illustrates the benefits of being able to step backwards in the program execution flow.
 We compile it with the following command.
 
 ```
@@ -111,7 +111,7 @@ We print the content of _rsp_ in hexadecimal with `p /x $rsp` which gives us the
 We examine the memory location with `x 0x7fffffffe638`.
 Voilà! There is the bogus low address again.
 
-The return instruction at the end of _main_ reads the return address from the top of the stack to jump back to the caller of _main_, but at some point this address was overwritten with this bogus value, leading to a segfault.
+The return instruction at the end of _main_ reads the return address from the top of the stack to jump back to the caller of _main_, but at some point, this address was overwritten with this bogus value, leading to a segfault.
 To find the location when the return address gets overwritten, we can make good use of watchpoints.
 
 ```
@@ -148,7 +148,7 @@ The fix is up to the reader.
 
 The overhead induced by the recording in GDB is the main reason why it is used very rarely.
 It is not practical for any non-trivial program.
-Nevertheless, it layed the ground work for other projects to base their work on.
+Nevertheless, it laid the ground work for other projects to base their work on.
 The [rr-project](https://rr-project.org/) tries to make recording and reverse execution efficient.
 
 
@@ -181,9 +181,11 @@ Program received signal SIGSEGV, Segmentation fault.
 0x0000000000000023 in ?? ()
 ```
 
+`rr replay` implicitly opens the last recording and stops at the entry point of the program which is at the symbol _\_start_.
+We continue execution with `c` to reach the end of the recording.
+
 There we are again.
 Getting a segfault when trying to execute code at 0x23.
-`rr replay` implicitly opens the last recording.
 You can use the same commands as in GDB to step backwards in the program execution, examine the stack and set watchpoints.
 You do not have to disable hardware watchpoints in `rr`.
 They work just fine.
@@ -191,7 +193,7 @@ Try it out for yourself.
 
 The separation in the two phases _record_ and _replay_ makes it easier to ship this information from the user to the developers.
 A recording is much better than backtraces and coredumps.
-Furthermore, if you face a bug which only happens sometimes, you only have to record it once and be able to reproduce it everytime by replaying the recording.
+Furthermore, if you face a bug which only happens sometimes, you only have to record it once and be able to reproduce it every time by replaying the recording.
 
 If you want to find out more about the inner workings of `rr` check out their [website](https://rr-project.org/) and [paper](https://arxiv.org/abs/1610.02144).
 
@@ -199,6 +201,8 @@ If you want to find out more about the inner workings of `rr` check out their [w
 # Conclusion
 
 GDB and rr are not the only debugging tools which support recording and reversible debugging.
-[UndoDB](https://www.undo.io/) is a commercial debugger for linux supporting record and replay.
+[UndoDB](https://www.undo.io/) is a commercial debugger for linux supporting efficient record and replay.
 Microsoft calls it "[Time Travel Debugging](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/time-travel-debugging-overview)".
-It seems to be right time to get familiar with these tools to improve the productivity of our debug sessions.
+It seems to be the right time to get familiar with these novel tools and features to improve the productivity of our debug sessions.
+Debugging is usually not fun.
+So, let's get it done quickly.
