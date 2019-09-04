@@ -4,7 +4,7 @@ date: 2019-09-03T23:54:52+02:00
 ---
 
 Modern processors are complex beasts.
-They reorder instructions in an ever increasing instruction window and speculatively execute following iterations of a loop by predicting the branch of the loop condition.
+They reorder instructions in an ever-increasing instruction window and speculatively execute following iterations of a loop by predicting the branch of the loop condition.
 Both features are meant to extract as much instruction parallelism from the program code as possible to feed superscalar CPUs with enough work.
 They can execute multiple instructions in a single cycle if there are no dependencies.
 Static machine code analyzers let us take a look at how our code is executed by modeling the various execution stages of a CPU.
@@ -70,7 +70,7 @@ Now, the processor only needs five cycles instead of nine to process the sequenc
 
 One instruction still requires three cycles to be processed.
 This is called the _latency_ of an instruction.
-After the first instruction, every following instruction only needs one additional cylce to finish as the _fetch_ and _exec_ stages are already done in parallel to the previous instruction.
+After the first instruction, every following instruction only needs one additional cycle to finish as the _fetch_ and _exec_ stages are already done in parallel to the previous instruction.
 This is called the _throughput_ of an instruction.
 It is usually stated in cycles-per-instruction (CPI).
 
@@ -78,7 +78,7 @@ It is usually stated in cycles-per-instruction (CPI).
 # Execution Ports
 
 Modern CPUs are superscalar, i.e., they can process multiple instructions in a single cycle, e.g., the `add` instruction has a throughput of 0.25 on recent Intel CPUs which means that up to four additions can be processed in a single cycle.
-This is achieved by having multiple so called ports to process pipeline stages.
+This is achieved by having multiple execution ports to process pipeline stages.
 Some ports are specialized for certain kind of operations (e.g., load/store, division).
 Other ports can perform a wide range of operations.
 
@@ -89,7 +89,7 @@ Unsurprisingly, most programs tend to apply operations on top of each other whic
 
 Out-of-order execution tries to extract as many independent sequences of instructions as possible in an instruction window which increases with every processor generation.
 The independent instructions are processed in parallel (instruction level parallelism, ILP).
-The results are stored to memory and made visible in the same order the instructions are layed out in the program code.
+The results are stored to memory and made visible in the same order the instructions are laid out in the program code.
 So, the observable effects look like it's processed in a sequential fashion, but under the hood, it's done in parallel and therefore faster.
 
 {{< todo >}}
@@ -138,7 +138,7 @@ IACA_END
 As IACA is a static analyzer, we do not need a full program.
 A simple function is enough.
 In this case, the function sums up all elements of the array passed as a pointer and size pair.
-The code region we want to analyze has to be marked with special instructions.
+The code region we want to analyze must be marked with special instructions.
 Luckily, IACA provides a header file with easy to use macros.
 To analyze the throughput of the loop in _sum_, we place `IACA_START` at the beginning of the loop body and `IACA_END` right after the loop.
 This way we get all instruction of the loop body and the loop condition which gets moved at the bottom of the loop by the compiler.
