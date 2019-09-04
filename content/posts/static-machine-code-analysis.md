@@ -189,7 +189,7 @@ Total Num Of Uops: 4
 
 That's a lot of information to digest.
 Let's take it step by step.
-First, IACA outputs its own version number and reports the parameter it was called with.
+First, IACA outputs its own version number and reports the parameters it was called with.
 Then, we see a summary of the throughput analysis.
 How many cycles each loop iteration takes on average and what the bottleneck is.
 We also get an overview of the usage of each port.
@@ -302,8 +302,8 @@ I think, they also account different latencies to memory loads and stores.
 
 # Conclusion
 
-I find it very insightful to see what the CPU is actually doing with the sequence of instruction a program is made of.
-It makes only sense to do this kind of analysis for very hot inner loops where you want to squeeze some more performance out of it.
+I find it very insightful to see what the CPU is actually doing with the sequence of instructions a program is made of.
+It makes only sense to do this kind of analysis for very hot inner loops where you want to squeeze some more performance out of.
 Especially for vectorized code I usually check at least once what these tools have to say about it.
 
 Even if you are not aiming for top performance, it is interesting to see how it works.
