@@ -2,7 +2,7 @@
 
 <main>
 	<div class="catalogue">
-		{{ range (.Paginate (where .Pages "Section" "posts")).Pages }}
+		{{ range (.Paginate (where .Site.RegularPages "Section" "posts")).Pages }}
 			{{ .Render "summary" }}
 		{{ end }}
 	</div>
