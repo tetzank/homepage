@@ -373,7 +373,7 @@ It calls `codegen` on the next operator to insert the nested code into the loop 
 Finally, it increments the row id of the morsel.
 
 That's all there is to a _scan_ operator.
-The _filter_ operator is pretty straightforward as well.
+The _filter_ operator is straightforward as well.
 
 {{< highlight "C++" >}}
 template<class Fn>
@@ -531,7 +531,7 @@ For each projected column, we fetch the value and add it to the implicit sum on 
 Additionally, we count the number of elements we have in the sum.
 This counter is used to distinguish an empty result set from a sum which just happens to be zero.
 
-To return the results back to the caller of the generated function, we have to store the sums to memory.
+To return the results back to the caller of the generated function, we must store the sums to memory.
 After all operators in the pipeline generated their code, the following function is called to generate an epilogue.
 
 {{< highlight "C++" >}}
@@ -563,12 +563,13 @@ The workload consists of a lot of short running queries which benefit from the v
 Even disabling optimizations in LLVM does not close the gap.
 
 In database research, the use of LLVM as JIT compiler seems to be the standard.
-JIT assemblers are usually neglected for being too hard to use and producing unoptimal code.
+JIT assemblers are usually neglected for being too hard to use and producing inefficient code.
 Furthermore, they are not portable.
-Well, this is all true, except the first one.
-COAT takes care of that.
+Well, COAT makes them easy to use and code efficiency is not so bad as we see by the results.
+Portability remains an issue.
 I still like to have them on the table to give me a baseline, especially a lower bound for the compilation latency.
 A JIT assembler shows me what is possible with a simple 1:1 mapping of C++ expressions to assembly instructions and how much a JIT compiler can improve on that given I invest time in optimizations.
+An unoptimized build with LLVM does not provide me with the same lower bound.
 
 These results should be taken with a grain of salt.
 This is just a simple prototype running a single workload.
@@ -585,9 +586,10 @@ COAT makes it easily accessible, so why not try it out.
 
 I hope this tutorial was informative and not too long.
 Code generation has a small learning curve to get into the right mindset.
-We are generating code which is executed later on.
-COAT helps to concentrate on the control flow of the generated code by hiding the gritty details.
-Code generation is not hard.
+We are generating code which is executed later.
+We have to keep in mind what is run when.
+COAT helps to concentrate on the control flow of the generated code by hiding the gritty details of the compiler APIs.
+It streamlines the process to the point where code generation is not hard anymore.
 
 In databases, more and more researchers and companies are adopting JIT compilation to squeeze more performance from the hardware.
 Now is a good time to jump in on it.
