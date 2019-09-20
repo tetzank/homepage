@@ -265,11 +265,6 @@ It only leverages the register allocator of the _back end_ which assigns virtual
 The use of virtual registers makes the generation of nested code fragments much easier.
 Nevertheless, we are writing assembly which is a tedious and error-prone process, and not portable at all.
 
-{{< todo >}}
-most use LLVM, falling into variant b) and c)
-d) is hardly used
-{{< / todo >}}
-
 To make our life easier, we will use COAT, an EDSL for C++ which simplifies the implementation of code generation.
 For details, see the [previous post](/posts/coat-edsl-for-codegen/) introducing it.
 The variants b) and c) are available with COAT's LLVM backend, variant d) with the AsmJit backend.
@@ -469,7 +464,7 @@ void codegen_impl(Fn &fn, CodegenContext<Fn> &ctx){
 {{<  / highlight >}}
 
 First, we fetch the value from the probed column.
-Next, we embed to pointer to the "hash table" in the generated code and get a `coat::Struct` object back, initialized with pointer address.
+Next, we embed the pointer to the "hash table" in the generated code and get the `coat::Struct` object `ht` back, initialized with the pointer address.
 The address of the pointer is stored in the generated code as an immediate value.
 `coat::Struct` is a wrapper for a pointer to a struct/class and provides access to member variables when they are _marked_ in a special way.
 
@@ -497,16 +492,23 @@ It is a custom function added to the wrapper object with CRTP.
 Hence, the implementation details of the "hash table" can be encapsulated inside its header file, even for code generation.
 As a user of the data structure, we do not have to know how to iterate over all entries with the same key.
 We use the provided convenience function.
-For details, check out the file _include/MultiArrayTable.h_.
-{{< todo >}}
-FIXME: make it a link to the file on github
-TODO: even better, explain it here
+For details, check out the file [_include/MultiArrayTable.h_](https://github.com/tetzank/sigmod18contest/blob/master/include/MultiArrayTable.h#L56).
 
+{{< todo >}}
 - show how `ht.iterate()` is implemented
 - explain `coat::Struct` and how to add `iterate()` to it
-
-TODO: mention other join implementations: join on unique, semi-join
 {{< / todo >}}
+
+Just for fun, I implemented additional join variants:
+joining with a [unique column][joinunique] using a simple [array table][AT], and a [semi-join][semijoin] using a [bitset][BT] to check if there is a join partner.
+You can see it as a form of strength reduction.
+We are replacing the generic join operator with cheaper versions if the data allows it.
+A minor speedup is the result.
+Follow the links and check out the code if you are curious.
+[joinunique]: https://github.com/tetzank/sigmod18contest/blob/master/include/JoinUniqueOperator.h
+[AT]: https://github.com/tetzank/sigmod18contest/blob/master/include/ArrayTable.h#
+[semijoin]: https://github.com/tetzank/sigmod18contest/blob/master/include/SemiJoinOperator.h
+[BT]: https://github.com/tetzank/sigmod18contest/blob/master/include/BitsetTable.h
 
 
 The last operator in each pipeline is the _projection_ operator.

@@ -20,7 +20,7 @@ Let's assume that parts of the input state of a program are known at a certain p
 Hence, some of the expressions and statements for which we know the inputs can be evaluated and the whole program transformed into a specialized form for this partial input.
 The specialized program ought to be faster as we already evaluated parts of its expressions.
 
-C++ provides languages features to support this concept like constant expressions.
+C++ provides language features to support this concept like constant expressions.
 Constant expressions are evaluated during compilation when all inputs are constants.
 Only their results leak to the runtime of the program.
 The point in time for the transformation is restricted to compile-time.
@@ -56,7 +56,7 @@ Everything has its learning curve.
 
 The most compelling advantage for me is type-safety at compile-time.
 The EDSL is integrated and therefore compiled together with all the other source code.
-With compile-time checks, we can verify if the EDSL is well-formed.
+With compile-time checks, we can verify that the EDSL is well-formed.
 
 
 # Codegen Abstract Types (COAT)
