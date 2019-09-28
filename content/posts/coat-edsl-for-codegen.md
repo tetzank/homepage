@@ -10,7 +10,7 @@ However, constant evaluation is limited as it cannot leverage runtime informatio
 Just-in-time compilations lifts this limitation by enabling programs to generate code at runtime.
 In this post, I will present a header-only library providing abstract types and control flow abstractions to make code generation at runtime easier to use.
 
-__Disclaimer: This project is still in its early alpha stage.__
+__Disclaimer: This project is still in its early alpha stage. The code is available on [github](https://github.com/tetzank/coat).__
 
 
 # Partial Evaluation
@@ -259,13 +259,14 @@ A `coat::Value` representing a variable in the generated code is basically just 
 All arithmetic operators are customized to generate instructions using the virtual registers of the operands.
 
 The generation is done immediately in the overloaded operator which means that temporaries used in nested expressions cannot be eliminated.
-Some SIMD libraries use expression trees to capture the whole expression and eliminates unnecessary temporaries.
+Some SIMD libraries use expression trees to capture the whole expression and eliminate unnecessary temporaries.
 This is not done here.
 The expressions are mapped 1:1 to the corresponding x86 instructions.
 
 The compilation latency of AsmJit is very low.
 If you want to generate a function as fast as possible, this is the right backend for you.
 The efficiency of the generated code is up to you.
+You have to write efficient code.
 
 
 __LLVM backend__
@@ -289,7 +290,7 @@ Optimization passes make this more efficient by storing values in registers wher
 The compilation latency of LLVM is much bigger compared to AsmJit, but LLVM provides optimization passes which can make a big difference in the runtime of the generated function.
 
 
-# Similar Project
+# Similar Projects
 
 A somewhat similar recent approach is [ClangJIT](https://arxiv.org/abs/1904.08555).
 To put it simply, it defers instantiation of annotated templates from compile-time to runtime.
@@ -301,6 +302,14 @@ The disadvantage is obviously the required compiler support which is currently l
 COAT works with any modern C++ compiler.
 Furthermore, compilation latency suffers from the fact that the application has to carry the full compiler along, including the C++ frontend instantiating the template at runtime.
 In COAT, you can choose the backend, and with the AsmJit backend compilation latency is very low.
+
+Another approach to simplify JIT compilation is [Easy::Jit](https://github.com/jmmartinez/easy-just-in-time).
+Similarly to ClangJIT, it relies heavily on the compiler to do the magic.
+A plugin for Clang is provided to inject an "optimization" pass which additionally stores LLVM IR of annotated functions in the executable.
+The LLVM IR is later used by the JIT compilation.
+
+The API is very simple, just a single function call.
+We rely on compiler assistance which makes it easy to use but also results in a high compilation latency.
 
 
 # Conclusion
