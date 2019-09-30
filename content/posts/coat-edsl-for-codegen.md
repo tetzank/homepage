@@ -304,7 +304,7 @@ Furthermore, compilation latency suffers from the fact that the application has 
 In COAT, you can choose the backend, and with the AsmJit backend compilation latency is very low.
 
 Another approach to simplify JIT compilation is [Easy::Jit](https://github.com/jmmartinez/easy-just-in-time).
-Similarly to ClangJIT, it relies heavily on the compiler to do the magic.
+Like ClangJIT, it relies heavily on the compiler to do the magic.
 A plugin for Clang is provided to inject an "optimization" pass which additionally stores LLVM IR of annotated functions in the executable.
 The LLVM IR is later used by the JIT compilation.
 

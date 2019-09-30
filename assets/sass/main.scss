@@ -190,3 +190,15 @@ svg {
 	display: block;
 	margin: auto;
 }
+
+table:not([style]) {
+	border: 1px solid black;
+	margin: auto;
+
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+	th, td {
+		padding: 0 1em;
+	}
+}

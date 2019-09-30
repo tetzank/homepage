@@ -562,7 +562,18 @@ Code generation can be that easy.
 If you build the prototype and run the workload provided by the contest, you will see that the execution with the AsmJit backend is much faster than the LLVM backend.
 Compilation latency is the main difference here.
 The workload consists of a lot of short running queries which benefit from the very low compilation latency of AsmJit.
-Even disabling optimizations in LLVM does not close the gap.
+Even disabling optimizations in LLVM does not close the gap for the compilation latency, and the execution time suffers considerably from it.
+
+Here are some measurements from my workstation.
+Depending on your machine, you might get quite different numbers, but the trend should be similar.
+
+Back End | Compilation Latency | Execution Time |
+ ------- | -------------------:| --------------:|
+AsmJit   |                5 ms |         550 ms |
+LLVM -O0 |              341 ms |         768 ms |
+LLVM -O1 |              650 ms |         513 ms |
+LLVM -O2 |              663 ms |         521 ms |
+LLVM -O3 |              660 ms |         567 ms |
 
 In database research, the use of LLVM as JIT compiler seems to be the standard.
 JIT assemblers are usually neglected for being too hard to use and producing inefficient code.
