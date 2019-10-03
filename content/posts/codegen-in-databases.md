@@ -589,11 +589,6 @@ This is just a simple prototype running a single workload.
 It needs to be shown if a JIT assembler like AsmJit can be used as a viable alternative to LLVM for short running queries in a more realistic setting.
 COAT makes it easily accessible, so why not try it out.
 
-{{< todo >}}
-- plot with measurements of public workload, comparing the two backends
-- breakdown of execution time
-{{< / todo >}}
-
 
 # Conclusion
 

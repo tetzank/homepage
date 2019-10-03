@@ -194,11 +194,23 @@ svg {
 table:not([style]) {
 	border: 1px solid black;
 	margin: auto;
+	//border-collapse: collapse;
 
-	tr:nth-child(even) {
-		background-color: #f2f2f2;
+	th {
+		//color: white;
+		//background-color: black;
+		text-decoration: underline;
 	}
 	th, td {
 		padding: 0 1em;
+	}
+
+	tbody {
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+		tr:hover {
+			background-color: #CCC;
+		}
 	}
 }
