@@ -565,6 +565,7 @@ The workload consists of a lot of short running queries which benefit from the v
 Even disabling optimizations in LLVM does not close the gap for the compilation latency, and the execution time suffers considerably from it.
 
 Here are some measurements from my workstation.
+These numbers are the sum for all queries in the workload.
 Depending on your machine, you might get quite different numbers, but the trend should be similar.
 
 Back End | Compilation Latency | Execution Time |
