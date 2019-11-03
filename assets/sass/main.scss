@@ -125,7 +125,7 @@ pre, code {
 .highlight {
 	position: relative; // so that position absolute works for language name
 
-	&>pre { // code highlighting in box
+	pre { // code highlighting in box
 		padding: .25em;
 		border-radius: 5px;
 		margin: 0;
@@ -229,4 +229,21 @@ table:not([style]) {
 			background-color: #CCC;
 		}
 	}
+}
+
+video {
+	display: block;
+	margin: auto;
+
+/*  time tag do not work
+	&::cue(b) {
+		color: red;
+	}
+	&::cue:past {
+		color: grey;
+	}
+	&::cue:future {
+		color: grey;
+	}
+*/
 }
