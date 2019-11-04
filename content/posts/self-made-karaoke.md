@@ -6,22 +6,22 @@ date: 2019-11-03T23:53:04+01:00
 I am definitely not the singer type.
 Never went to any karaoke and probably will never do.
 But for some reason I was intrigued to see, from a technical standpoint, how to create a karaoke song.
-How does one remove the vocals of a song and make the lyrics appear at the right time.
+How does one remove the vocals from a song and make the lyrics appear at the right time?
 I will show you the poor man's approach of making your own karaoke songs and get them to play on a website.
 
-As my main system runs linux and I'm a terminal guy, I will only use open source commandline tools.
-Most of the tools are probably also available for your platform.
+As my main system runs Linux and I'm a terminal guy, I will only use open source command line tools.
+Most of the tools are probably also available for your platform of choice.
 
 
 # Getting A Song
 
 The example song we will use is ["Play Crack the Sky" by Brand New][yt], mainly because of the awesome lyrics.
-Most songs nowadays are available on Youtube, and this is no exception.
+Most songs nowadays are available on YouTube, and this one is no exception.
 So, let's just download it from there.
 The best tool for this job is `youtube-dl`.
 [yt]: https://www.youtube.com/watch?v=--EeaSYoH04
 
-`youtuble-dl` supports a gazillion video platforms, not just Youtube.
+`youtuble-dl` supports a gazillion video platforms, not just YouTube.
 If you ever wanted to download a file from a streaming website, this tool should have you covered.
 
 Let us first have a look at the available formats we can choose from with the option `-F`.
@@ -73,12 +73,12 @@ We convert the song with `ffmpeg` to the wav format which `sox` understands.
 $ ffmpeg -i song.webm song.wav
 ```
 
-Next, we remove the vocals by applying the _oops_ effect with `sox` and store the file to _sound.wav_.
+Next, we remove the vocals by applying the _oops_ effect of `sox` and store the result to _sound.wav_.
 ```
 $ sox song.wav sound.wav oops
 ```
 
-Finally, we encode the resulting wav file back to a webm file, using the opus codec with a bit rate of 48 kbps.
+Finally, we transcode the resulting wav file back to a webm file, using the opus codec with a bit rate of 48 kbps.
 You can choose a higher bit rate if you like.
 ```
 $ ffmpeg -i sound.wav -c:a libopus -b:a 48k sound.webm
@@ -94,12 +94,12 @@ Otherwise, drag & drop it into an empty browser window to have a listen.
 # Splitting Vocals From Instruments
 
 A different approach using artificial neural networks is used by [Spleeter](https://github.com/deezer/spleeter).
-It comes with pre-trained models for tensorflow and is quite easy to use.
+It comes with pre-trained models for TensorFlow and is quite easy to use.
 We will use it to separate the vocals from everything else and therefore get the music without the vocals.
 
 `spleeter` converts the input file internally with `ffmpeg`.
 We do not have to do it ourselves beforehand.
-The following command does the job and produces two wav files in the directory _output_.
+The following command separates the vocals from the music and produces two wav files in the directory _output_.
 It downloads the model to a subfolder of the current directory when it runs the first time.
 Try to stay in this directory as it otherwise downloads the model every time.
 ```
@@ -109,7 +109,7 @@ $ spleeter separate -i song.webm -p spleeter:2stems -o output
 You can optionally encode the wav file with `ffmpeg` as before.
 
 This approach works for most of the songs I tested it with, but sometimes the resulting file contains quite some awful sounding artifacts.
-For our example song, I actually prefer the output of `sox` as it leaves the background vocals unchanged, and the faint echo is also nice.
+For our example song, I actually prefer the output of `sox` as it leaves the background vocals unchanged, and the faint echo of the main voice is also nice.
 In the end, it depends heavily on the song.
 `spleeter` works with a much larger variety of songs and does an amazing job for such a difficult task.
 Hats off!
@@ -131,9 +131,10 @@ So, let's target HTML5.
 
 The subtitle format for HTML5 is [WebVTT](https://w3c.github.io/webvtt/).
 The specification is still just a draft and not done yet.
-Even more problematic, browser support is lacking a lot of the more interesting features like proper time tag support.
+Even more problematic, browser support is lacking a lot of the more interesting features like proper time-tag support.
 Styling with CSS is also hit and miss.
 It might work with some browsers but not with others.
+Therefore, I will focus only on the basic functionality which has support in all modern browsers.
 
 Like all web standard formats, WebVTT is a text format and can be created with any text editor.
 Here is a basic example.
@@ -150,13 +151,14 @@ This is a WebVTT file.
 
 Every WebVTT file has to begin with the string "WEBVTT" followed by a blank line.
 The main part of the file consists of a sequence of _cues_.
-Each _cue_ is active for certain timespan given by start and end time and displays some text.
-_cues_ can overlap which means that multiple text segments are displayed at the same time.
-The _cues_ are separated by a blank line from each other.
+Each _cue_ is active for a certain timespan specified by a start time and an end time.
+During this timespan, it displays a text segment which can span multiple lines.
+_Cues_ can overlap which means that multiple text segments are displayed at the same time.
+A blank line separates two _cues_ from each other.
 
 Well then, that's all there is.
 Get the lyrics from the web, listen through the song and format the lyrics with timestamps accordingly.
-All you need is a text editor and some stamina to get done with the tedious work.
+All you need is a text editor and some stamina to get through the tedious work.
 
 I did it for the example song.
 You can download the file [here](/karaoke/lyrics.vtt).
@@ -191,7 +193,7 @@ Now, we can put it all together on a website with following HTML-code.
 </video>
 {{< / highlight >}}
 
-You can try it out below, if you have javascript enabled.
+You can try it out the video file below, if you have JavaScript enabled in your browser.
 
 {{< plain >}}
 <hr/>
