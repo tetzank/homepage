@@ -200,6 +200,8 @@ img {
 	margin-right: auto;
 	// rounded corners
 	border-radius: 15px;
+	// offsetx offsety blur-radius
+	box-shadow: 2px 3px 5px gray;
 }
 
 svg {
