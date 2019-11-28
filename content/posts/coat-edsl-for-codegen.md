@@ -309,12 +309,12 @@ A plugin for Clang is provided to inject an "optimization" pass which additional
 The LLVM IR is later used by the JIT compilation.
 
 The API is very simple, just a single function call.
-We rely on compiler assistance which makes it easy to use but also results in a high compilation latency.
+It relies on compiler assistance which makes it easy to use but also results in a high compilation latency.
 
 
 # Conclusion
 
-The source code is available in a [github repository](https://github.com/tetzank/coat.git).
+The source code is available in a [github repository](https://github.com/tetzank/coat).
 The project is still in its early alpha stage with a lot of limitations, e.g., debugging support is completely missing at the moment.
 With the help of others, I hope, it can become a useful tool for C++ developers.
 

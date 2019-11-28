@@ -51,7 +51,7 @@ $ youtube-dl -f 251 'https://www.youtube.com/watch?v=--EeaSYoH04' -o song.webm
 ```
 
 
-# Removing Vocals In The Center
+# Removing Vocals in the Center
 
 A tiny tool we can use is `sox`, "the Swiss Army knife of audio manipulation", as they call it themselves.
 `sox` supports a lot of audio effects, and one of them, called _oops_, does exactly what we want.
@@ -91,7 +91,7 @@ Any decent media player should be able to play it.
 Otherwise, drag & drop it into an empty browser window to have a listen.
 
 
-# Splitting Vocals From Instruments
+# Splitting Vocals from Instruments
 
 A different approach using artificial neural networks is used by [Spleeter](https://github.com/deezer/spleeter).
 It comes with pre-trained models for TensorFlow and is quite easy to use.
@@ -136,7 +136,7 @@ Styling with CSS is also hit and miss.
 It might work with some browsers but not with others.
 Therefore, I will focus only on the basic functionality which has support in all modern browsers.
 
-Like all web standard formats, WebVTT is a text format and can be created with any text editor.
+Like all standard web formats, WebVTT is a text format and can be created with any text editor.
 Here is a basic example.
 
 {{< highlight webvtt >}}
@@ -164,13 +164,13 @@ I did it for the example song.
 You can download the file [here](/karaoke/lyrics.vtt).
 
 
-# Playback In HTML5
+# Playback in HTML5
 
 Unfortunately, there seems to be no way to get the audio-tag of HTML5 and WebVTT playing along nicely.
 It did not work in any of the browsers I tried.
 The only work around I found working consistently in all browsers was to add a video track to the audio file, resulting in a video file which works fine with the video-tag and WebVTT.
 
-The following command create a black image file which we will use as video image.
+The following command creates a black image file which we will use as video image.
 You can use any other image.
 ```
 $ convert -size 640x480 xc:black black.png
@@ -183,7 +183,7 @@ $ ffmpeg -loop 1 -i black.png -i sound.webm -c:v libvpx-vp9 -c:a copy -shortest 
 We loop the image forever with `-loop 1`, the two input files follow.
 Then, we specify the video codec to be VP9 by using the encoder library _libvpx-vp9_.
 The audio should be just copied into the video file which we do with the option `-c:a copy`.
-Finally, we specify with `-shortest` that we want to stop encoding when one of the input ends.
+Finally, we specify with `-shortest` that we want to stop encoding when one of the inputs ends.
 This option is required as the image loops forever.
 
 Now, we can put it all together on a website with following HTML-code.
@@ -193,7 +193,8 @@ Now, we can put it all together on a website with following HTML-code.
 </video>
 {{< / highlight >}}
 
-You can try it out the video file below, if you have JavaScript enabled in your browser.
+You can try out the video file below, if you have JavaScript enabled in your browser.
+The lyrics file is added automatically.
 
 {{< plain >}}
 <hr/>
