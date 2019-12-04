@@ -27,7 +27,7 @@ $ mkdir -p ~/.local/share/okteta/structures/
 $ ln -s $PWD/asmjit-utilities/perf/jitdump-structure ~/.local/share/okteta/structures/
 ```
 
-Now you just need to download the example [file][file], uncompress it and open it in Okteta.
+Now you just need to download the example [file][file], decompress it and open it in Okteta.
 
 ```
 $ wget https://tetzank.github.io/files/jit-376583.dump.xz
@@ -51,7 +51,7 @@ Furthermore, you can conveniently download new definitions from a central server
 Unfortunately, there are not many definitions available.
 This feature seems to be a hidden gem not many people know about.
 
-Each value can be accessed and also modified.
+Each value can be accessed and modified.
 It makes debugging of binary files very easy as the file is parsed for you by the hex editor.
 
 {{< todo >}}
@@ -271,7 +271,7 @@ The array size is defined in the field `code_size`.
 We pass a function to `array()` which extracts the size dynamically when the array is constructed.
 Here, `this` refers to the array we are constructing which means we have to get to the parent structure first before accessing the value of `code_size`.
 
-Now that we know all of this, the definition of the debug info record is pretty straightforward.
+Now that we know all of this, the definition of the debug info record is straightforward.
 
 {{< highlight "js" >}}
 var debug_entry = struct({
@@ -346,9 +346,9 @@ And that is rare for me to say about JavaScript code...
 
 I like this tool very much.
 The definitions are easy to write and the visualization of the data layout inside the hex editor helps tremendously.
-JavaScript is definitely not my favorite language but it gets the job done.
+JavaScript is definitely not my favorite programming language, but it gets the job done and is more flexible than the XML definition.
 
-For me, this is the fastest way to write a parser for a binary data format.
+For me, this is the fastest way to write a parser for a binary data format and get a graphical interface for free.
 I'm glad to have it in my toolset.
 
 

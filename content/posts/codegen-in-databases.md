@@ -27,7 +27,7 @@ The queries are in an easy to parse text format. Let's have a look at one exampl
 
 Example query: `0 2 4|0.1=1.2&1.0=2.1&0.1>3000|0.0 1.1`
 
-There are three parts:
+There are three parts separated by `|`:
 
 1. The list of relations participating in the query.
 2. All equi-joins and filters combined in one conjunction.
