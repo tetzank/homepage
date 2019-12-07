@@ -10,7 +10,7 @@ However, constant evaluation is limited as it cannot leverage runtime informatio
 Just-in-time compilations lifts this limitation by enabling programs to generate code at runtime.
 In this post, I will present a header-only library providing abstract types and control flow abstractions to make code generation at runtime easier to use.
 
-__Disclaimer: This project is still in its early alpha stage. The code is available on [github](https://github.com/tetzank/coat).__
+__Disclaimer: This project is still in its early alpha stage. The code is available on [github][repo].__
 
 
 # Partial Evaluation
@@ -123,7 +123,7 @@ In this example, we generate a function which calculates the sum of a vector.
 This is hardly a useful application of just-in-time code generation, but it is small enough to show the full program, and it gets the main idea of COAT across.
 
 After generating some basic data, we initialize one of the compiler backends of COAT.
-At the moment, COAT supports two backends: AsmJit and LLVM.
+At the moment, COAT supports two backends: [AsmJit][asmjit] and [LLVM][llvm].
 Next, we define the signature of the function we want to generate with `using`.
 The data array is passed with a pointer and size pair to the function which in turn returns the sum of all elements.
 Finally, we create a `coat::Function` object with the compiler backend and function signature as template parameters.
@@ -242,7 +242,7 @@ And also give some details about the implementation of each backend.
 
 __AsmJit backend__
 
-[AsmJit](https://asmjit.com/) is a C++ library providing a just-in-time assembler.
+[AsmJit][asmjit] is a C++ library providing a just-in-time assembler.
 It supports x86 assembly with all of its extensions.
 The API is quite simple.
 After a few initializations, we can start generating x86 instructions one after the other.
@@ -271,7 +271,7 @@ You have to write efficient code.
 
 __LLVM backend__
 
-[LLVM](https://llvm.org/) is a modular compiler framework providing ahead-of-time and just-in-time compiler support.
+[LLVM][llvm] is a modular compiler framework providing ahead-of-time and just-in-time compiler support.
 Clang is the C++ frontend of LLVM.
 The API is quite complex as LLVM supports a lot of different compilation modes.
 
@@ -314,9 +314,21 @@ It relies on compiler assistance which makes it easy to use but also results in 
 
 # Conclusion
 
-The source code is available in a [github repository](https://github.com/tetzank/coat).
+The source code is available in a [github repository][repo].
 The project is still in its early alpha stage with a lot of limitations, e.g., debugging support is completely missing at the moment.
 With the help of others, I hope, it can become a useful tool for C++ developers.
 
 In the next post, I will present a more comprehensive example for just-in-time compilation.
 We will look at modern relational databases and how they make use of code generation for query execution.
+
+
+# References
+
+- [Source code repository][repo]
+- [AsmJit library][asmjit]
+- [LLVM compiler framework][llvm]
+
+
+[repo]: https://github.com/tetzank/coat
+[asmjit]: https://asmjit.com/
+[llvm]: https://llvm.org/

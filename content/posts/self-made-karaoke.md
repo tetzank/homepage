@@ -19,7 +19,6 @@ The example song we will use is ["Play Crack the Sky" by Brand New][yt], mainly 
 Most songs nowadays are available on YouTube, and this one is no exception.
 So, let's just download it from there.
 The best tool for this job is `youtube-dl`.
-[yt]: https://www.youtube.com/watch?v=--EeaSYoH04
 
 `youtuble-dl` supports a gazillion video platforms, not just YouTube.
 If you ever wanted to download a file from a streaming website, this tool should have you covered.
@@ -53,7 +52,7 @@ $ youtube-dl -f 251 'https://www.youtube.com/watch?v=--EeaSYoH04' -o song.webm
 
 # Removing Vocals in the Center
 
-A tiny tool we can use is `sox`, "the Swiss Army knife of audio manipulation", as they call it themselves.
+A tiny tool we can use is [SoX][sox], "the Swiss Army knife of audio manipulation", as they call it themselves.
 `sox` supports a lot of audio effects, and one of them, called _oops_, does exactly what we want.
 It remixes a stereo audio file to a file with two mono channels where each mono channel contains the difference between the two channels in the stereo file.
 If the vocals are in the center, they get extinguished as they are the same on the left and right channel, no difference.
@@ -93,7 +92,7 @@ Otherwise, drag & drop it into an empty browser window to have a listen.
 
 # Splitting Vocals from Instruments
 
-A different approach using artificial neural networks is used by [Spleeter](https://github.com/deezer/spleeter).
+A different approach using artificial neural networks is used by [Spleeter][spleeter].
 It comes with pre-trained models for TensorFlow and is quite easy to use.
 We will use it to separate the vocals from everything else and therefore get the music without the vocals.
 
@@ -114,7 +113,7 @@ In the end, it depends heavily on the song.
 `spleeter` works with a much larger variety of songs and does an amazing job for such a difficult task.
 Hats off!
 
-There are similar tools out there like [Open-Unmix](https://sigsep.github.io/open-unmix/) which I have not tried yet.
+There are similar tools out there like [Open-Unmix][open-unmix] which I have not tried yet.
 
 
 # Timed Lyrics
@@ -129,7 +128,7 @@ It all depends which media platform we want to target.
 The "cool kids" are on the web, aren't they?
 So, let's target HTML5.
 
-The subtitle format for HTML5 is [WebVTT](https://w3c.github.io/webvtt/).
+The subtitle format for HTML5 is [WebVTT][webvtt].
 The specification is still just a draft and not done yet.
 Even more problematic, browser support is lacking a lot of the more interesting features like proper time-tag support.
 Styling with CSS is also hit and miss.
@@ -226,3 +225,18 @@ Only the basic functionality is usable, but it would be nice to highlight the cu
 The specification of WebVTT supports it, but no browser does.
 
 Let us hope for a brighter future where we can sing along our favorite songs not caring what our neighbors might think about it.
+
+
+# References
+
+- [SoX][sox]
+- [Spleeter][spleeter]
+- [Open-Unmix][open-unmix]
+- [WebVTT specification][webvtt]
+
+
+[yt]: https://www.youtube.com/watch?v=--EeaSYoH04
+[sox]: http://sox.sourceforge.net/
+[spleeter]: https://github.com/deezer/spleeter
+[open-unmix]: https://sigsep.github.io/open-unmix/
+[webvtt]: https://w3c.github.io/webvtt/

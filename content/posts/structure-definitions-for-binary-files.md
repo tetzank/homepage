@@ -352,6 +352,14 @@ For me, this is the fastest way to write a parser for a binary data format and g
 I'm glad to have it in my toolset.
 
 
+# References
+
+- [jitdump Specification][spec]
+- [Okteta's website][okteta]
+- [Okteta's manual entry about structure definitions][manual]
+- [Wiki entry about structure definitions][wiki]
+
+
   [spec]: https://github.com/torvalds/linux/blob/master/tools/perf/Documentation/jitdump-specification.txt
 [okteta]: https://kde.org/applications/utilities/org.kde.okteta
   [file]: /files/jit-376583.dump.xz

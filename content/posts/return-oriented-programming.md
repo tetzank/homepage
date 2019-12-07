@@ -29,7 +29,7 @@ There are two operations `call` does.
 Notice that `call` does not handle any function parameters.
 They are passed in registers, and on the stack if a function has a lot of parameters.
 The calling convention of the operating system specifies which registers have to be used by a conforming compiler.
-Wikipedia has a nice [overview](https://en.wikipedia.org/wiki/X86_calling_conventions#List_of_x86_calling_conventions) of the various calling conventions.
+Wikipedia has a nice [overview][asmcalls] of the various calling conventions.
 We will focus on x86-64 Linux.
 There, the first six parameters are passed in `rdi`, `rsi`, `rdx`, `rcx`, `r8` and `r9`.
 Any additional parameter is passed on the stack.
@@ -49,7 +49,7 @@ It loads the value from the top of the stack into the register provided as opera
 These two instructions work in the same way as you would expect from push and pop operations on a stack data structure.
 
 Now that we know some basic x86 assembly instructions, let's look at the first two challenges provided by
-[ROP Emporium](https://ropemporium.com/)
+[ROP Emporium][ropemporium]
 which is a very nice website to learn the basics of return oriented programming.
 __The following sections will hold your hand all the way through the first two challenges.
 If you want to try them without spoilers then do so now.__
@@ -69,7 +69,7 @@ And today, we are playing attacker.
 
 But first, let's step back a little and let us analyze the executable we got.
 We will focus on the 64-bit version and mostly use
-[Radare2 (r2)](https://radare.org/)
+[Radare2 (r2)][r2]
 to analyze it.
 `r2` is a very powerful reverse engineering tool.
 Hence, it is quite complex.
@@ -610,7 +610,7 @@ as an example for ROP gadget spoilage
 {{< / todo >}}
 
 
-[Intel CET](https://software.intel.com/sites/default/files/managed/4d/2a/control-flow-enforcement-technology-preview.pdf)
+[Intel CET][cet]
 changes how the `call` and `ret` instruction work.
 It creates a shadow stack for return addresses.
 `call` pushes to both stacks, normal and shadow, and `ret` pops from both and does a comparison before jumping.
@@ -621,7 +621,7 @@ It requires compiler support which landed in GCC 8.
 And even more importantly, CPUs supporting this feature.
 I am not aware of any CPU being sold today that supports it.
 Something to keep in mind for the future, I guess.
-In the meantime, one might try Clang's [SafeStack](https://clang.llvm.org/docs/SafeStack.html) which implements a shadow stack as well but works on today's CPUs.
+In the meantime, one might try Clang's [SafeStack][safestack] which implements a shadow stack as well but works on today's CPUs.
 
 
 # Conclusion
@@ -639,3 +639,19 @@ Who knows...
 I think one can only grow as a programmer when one occasionally lifts the lid and has a look how things are really implemented.
 Curiosity is part of my job description as a researcher and leads to deeper understanding which I am happy to share with you.
 Until next time.
+
+
+# References
+
+- [x86 calling conventions][asmcalls]
+- [ROP Emporium][ropemporium]
+- [Radare2][r2]
+- [Intel CET][cet]
+- [Clang SafeStack][safestack]
+
+
+[asmcalls]: https://en.wikipedia.org/wiki/X86_calling_conventions#List_of_x86_calling_conventions
+[ropemporium]: https://ropemporium.com/
+[r2]: https://radare.org/
+[cet]: https://software.intel.com/sites/default/files/managed/4d/2a/control-flow-enforcement-technology-preview.pdf
+[safestack]: https://clang.llvm.org/docs/SafeStack.html

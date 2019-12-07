@@ -118,7 +118,7 @@ That is CISC vs. RISC in a nutshell.
 
 # Intel Architecture Code Analyzer
 
-The first tool is called [IACA](https://software.intel.com/en-us/articles/intel-architecture-code-analyzer).
+The first tool is called [IACA][iaca].
 Let us create a tiny test program and see how it works.
 
 {{< highlight "C" >}}
@@ -203,7 +203,7 @@ It makes sense to handle them in a special way.
 
 # LLVM's Machine Code Analyzer
 
-A similar tool is [LLVM-MCA](https://llvm.org/docs/CommandGuide/llvm-mca.html).
+A similar tool is [LLVM-MCA][mca].
 Let's try it out on the same tiny function as before.
 
 {{< highlight "C" >}}
@@ -311,7 +311,7 @@ You can also check out the timeline view in LLVM-MCA with the option `-timeline`
 It shows how the pipeline is filled up with various instructions over time.
 You can see for yourself how many cycles one iteration requires.
 
-LLVM-MCA is also available on the [Compiler Explorer](https://godbolt.org/).
+LLVM-MCA is also available on the [Compiler Explorer][godbolt].
 On the far right below the compiler options, you can add additional tools.
 LLVM-MCA is one of them.
 Use the inline assembly as done in the example above.
@@ -379,3 +379,15 @@ $ gcc -S -DMCA -DUNROLL=2 -O2 -masm=intel sum.c -o - | llvm-mca
 ```
 
 (vary the value for `UNROLL` of course)
+
+
+# References
+
+- [Intel Architecture Code Analyzer][iaca]
+- [LLVM Machine Code Analyzer][mca]
+- [Compiler Explorer][godbolt]
+
+
+[iaca]: https://software.intel.com/en-us/articles/intel-architecture-code-analyzer
+[mca]: https://llvm.org/docs/CommandGuide/llvm-mca.html
+[godbolt]: https://godbolt.org/

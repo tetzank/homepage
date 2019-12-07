@@ -18,7 +18,7 @@ It is all about performance.
 The submissions are ranked by their evaluation time.
 The winner with the fastest program usually organizes the contest in the following year.
 
-In 2018, [the task](http://sigmod18contest.db.in.tum.de/task.shtml) was to write a prototype of a query execution engine.
+In 2018, [the task][task] was to write a prototype of a query execution engine.
 The queries are quite simple, consisting only of joins with an equivalence predicate (equi-joins) and simple filters (single predicate, no complex expressions).
 Furthermore, there is only one data type: an integer of 8 bytes.
 This limits the number of operators the execution engine must support considerably which makes it a nice task for a programming contest, and a tutorial such as this one.
@@ -54,7 +54,7 @@ I hope that you will agree with me at the end of this tutorial.
 
 # Data-centric Execution Pipeline
 
-We follow the approach of data-centric code generation introduced in [HyPer](http://hyper-db.com/) with the paper "Efficiently Compiling Efficient Query Plans for Modern Hardware" by Thomas Neumann.
+We follow the approach of data-centric code generation introduced in [HyPer][hyper] with the paper "Efficiently Compiling Efficient Query Plans for Modern Hardware" by Thomas Neumann.
 Check out the list of publications on their website if you want to get deeper into the topic.
 
 We focus purely on the query execution engine in this tutorial.
@@ -265,9 +265,9 @@ It only leverages the register allocator of the _back end_ which assigns virtual
 The use of virtual registers makes the generation of nested code fragments much easier.
 Nevertheless, we are writing assembly which is a tedious and error-prone process, and not portable at all.
 
-To make our life easier, we will use COAT, an EDSL for C++ which simplifies the implementation of code generation.
+To make our life easier, we will use [COAT][coat], an EDSL for C++ which simplifies the implementation of code generation.
 For details, see the [previous post](/posts/coat-edsl-for-codegen/) introducing it.
-The variants b) and c) are available with COAT's LLVM backend, variant d) with the AsmJit backend.
+The variants b) and c) are available with COAT's [LLVM][llvm] backend, variant d) with the [AsmJit][asmjit] backend.
 The complexity is hidden from sight behind the EDSL.
 We reap the benefits without sacrificing the ease-of-use.
 
@@ -284,7 +284,7 @@ This parallelization scheme is straightforward and only changes the code generat
 # Operator Implementations
 
 In this section, I will explain how the code generation is done in the operators.
-The whole project is available in a [git repository on github](https://github.com/tetzank/sigmod18contest).
+The whole project is available in a [git repository on github][repo].
 You can check out the code to see all the details.
 
 To recap, the programming contest of 2018 requires only a few operators: _scan_, _filter_, _equi-join_ and _projection/sum_.
@@ -602,3 +602,21 @@ It streamlines the process to the point where code generation is not hard anymor
 
 In databases, more and more researchers and companies are adopting JIT compilation to squeeze more performance from the hardware.
 Now is a good time to jump in on it.
+
+
+# References
+
+- [Source code repository][repo]
+- [Task description for SIGMOD programming contest 2018][task]
+- [HyPer database][hyper]
+- [COAT - EDSL for code generation][coat]
+- [AsmJit library][asmjit]
+- [LLVM compiler framework][llvm]
+
+
+[repo]: https://github.com/tetzank/sigmod18contest
+[task]: http://sigmod18contest.db.in.tum.de/task.shtml
+[coat]: https://github.com/tetzank/coat
+[asmjit]: https://asmjit.com/
+[llvm]: https://llvm.org/
+[hyper]: http://hyper-db.com/

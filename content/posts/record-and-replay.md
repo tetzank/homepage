@@ -14,7 +14,7 @@ Being able to step backwards in the program execution helps tremendously as we c
 
 # Support in GDB
 
-GDB has built-in support for recording the execution flow and reversible debugging.
+GDB has built-in support for recording the execution flow and [reversible debugging][gdbmanual].
 Let us look at the following tiny program to learn the basic commands and get a feeling where reversible debugging might be helpful.
 
 {{< highlight "C" >}}
@@ -149,7 +149,7 @@ The fix is up to the reader.
 The overhead induced by the recording in GDB is the main reason why it is used very rarely.
 It is not practical for any non-trivial program.
 Nevertheless, it laid the ground work for other projects to base their work on.
-The [rr-project](https://rr-project.org/) tries to make recording and reverse execution efficient.
+The [rr-project][rr] tries to make recording and reverse execution efficient.
 
 
 # The RR-Project
@@ -195,7 +195,7 @@ The separation in the two phases _record_ and _replay_ makes it easier to ship t
 A recording is much better than backtraces and coredumps.
 Furthermore, if you face a bug which only happens sometimes, you only have to record it once and be able to reproduce it every time by replaying the recording.
 
-If you want to find out more about the inner workings of `rr` check out their [website](https://rr-project.org/) and [paper](https://arxiv.org/abs/1610.02144).
+If you want to find out more about the inner workings of `rr` check out their [website][rr] and [paper][rrpaper].
 
 
 # Conclusion
@@ -206,3 +206,15 @@ Microsoft calls it "[Time Travel Debugging](https://docs.microsoft.com/en-us/win
 It seems to be the right time to get familiar with these novel tools and features to improve the productivity of our debug sessions.
 Debugging is usually not fun.
 So, let's get it done quickly.
+
+
+# References
+
+- [GDB manual][gdbmanual]
+- [rr-project website][rr]
+- [rr-project paper][rrpaper]
+
+
+[gdbmanual]: https://sourceware.org/gdb/onlinedocs/gdb/Reverse-Execution.html
+[rr]: https://rr-project.org/
+[rrpaper]: https://arxiv.org/abs/1610.02144
