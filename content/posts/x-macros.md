@@ -40,7 +40,7 @@ The fix is obvious: put everything in parentheses!
 The reason for this behavior is easy to understand: the preprocessor does not know anything about the semantics of the expressions.
 Basically, it just copies text around following its expansion rules, not knowing what the text means and if the assembled code makes any sense for the following compilation step.
 This separation of concerns keeps tools simple, but it can lead to unexpected pitfalls.
-If you feel curious about other common problems, you can check out the ['Macro Pitfalls'](https://gcc.gnu.org/onlinedocs/cpp/Macro-Pitfalls.html#Macro-Pitfalls) section in the documentation.
+If you feel curious about other common problems, you can check out the ['Macro Pitfalls'][pitfalls] section in the documentation.
 
 I do not use macros as inlined functions anymore.
 A normal function has way less surprises in store than a macro.
@@ -112,7 +112,7 @@ At the end, we explicitly undefine the macro `X()`, so that we can define it in 
 The initializer list for the array is generated similarly to the content of the enum.
 We define the macro `X()` before expanding `COLORS`.
 This time, we want to generate a string representation for each element.
-We convert the macro parameter to a string literal with the preprocessing operator `#` in front of the parameter, see [Stringizing](https://gcc.gnu.org/onlinedocs/cpp/Stringizing.html#Stringizing).
+We convert the macro parameter to a string literal with the preprocessing operator `#` in front of the parameter, see [Stringizing][stringizing].
 It will generate strings in the same order as the enum.
 
 
@@ -222,3 +222,13 @@ I recently used X-macros to add a bit of metadata to classes and structures in s
 My list of elements was the members with their types.
 
 See also wikibooks for [more examples](https://en.wikibooks.org/wiki/C_Programming/Preprocessor#X-Macros).
+
+
+# References
+
+- [Macro Pitfalls][pitfalls]
+- [Stringizing][stringizing]: converting macro values into string literals
+
+
+[pitfalls]: https://gcc.gnu.org/onlinedocs/cpp/Macro-Pitfalls.html#Macro-Pitfalls
+[stringizing]: https://gcc.gnu.org/onlinedocs/cpp/Stringizing.html#Stringizing

@@ -360,9 +360,9 @@ I'm glad to have it in my toolset.
 - [Wiki entry about structure definitions][wiki]
 
 
-  [spec]: https://github.com/torvalds/linux/blob/master/tools/perf/Documentation/jitdump-specification.txt
+[spec]: https://github.com/torvalds/linux/blob/master/tools/perf/Documentation/jitdump-specification.txt
 [okteta]: https://kde.org/applications/utilities/org.kde.okteta
-  [file]: /files/jit-376583.dump.xz
-   [def]: https://github.com/tetzank/asmjit-utilities/tree/master/perf/jitdump-structure
+[file]: /files/jit-376583.dump.xz
+[def]: https://github.com/tetzank/asmjit-utilities/tree/master/perf/jitdump-structure
 [manual]: https://docs.kde.org/stable5/en/extragear-utils/okteta/tools-structures.html
-  [wiki]: https://userbase.kde.org/Okteta/Writing_structure_definitions
+[wiki]: https://userbase.kde.org/Okteta/Writing_structure_definitions
