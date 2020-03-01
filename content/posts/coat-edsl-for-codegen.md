@@ -311,6 +311,10 @@ The LLVM IR is later used by the JIT compilation.
 The API is very simple, just a single function call.
 It relies on compiler assistance which makes it easy to use but also results in a high compilation latency.
 
+I was recently made aware of another project which is very similar to COAT.
+[CodeGen](https://github.com/pdziepak/codegen) is a wrapper library for LLVM providing C++ types with operator overloads for easier JIT compilation.
+Unfortunately, the project seems to be inactive.
+
 
 # Conclusion
 
