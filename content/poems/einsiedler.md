@@ -6,14 +6,14 @@ date: 2019-12-30T11:34:48+01:00
 Der Frühling ist da. Die Sonne lacht.
 Die Decke fällt mir auf den Kopf, abends halb acht.
 Es treibt mich hinaus, raus in die Natur.
-Ich schnapp' mir'n Buch und trete in den Flur.
+Ich schnapp' mir 'n Buch und trete in den Flur.
 Die Treppe hinunter, an die frische Luft.
 Raus aus der Enge, rein in den Frühlingsduft.
 
 Über Brücke und Wehr, dem Ziel entgegen.
 Direkt am Ufer, am Neckar gelegen.
 Das saftige Grün, die letzte Stadtidylle,
-läd zum Verweilen ein, ein Ort der Stille.
+lädt zum Verweilen ein, ein Ort der Stille.
 
 An bekannter Stelle lasse ich mich nieder.
 Mein Rückzugsort, hierher komme ich immer wieder.

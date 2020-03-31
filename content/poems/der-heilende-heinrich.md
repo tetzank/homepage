@@ -6,7 +6,7 @@ date: 2019-11-01T11:11:11+00:00
 {{< audio "der_heilende_heinrich.opus" >}}
 
 Unterwegs zu Pferd bei Donner und Regen,
-streift er durch's Land und bringt seinen Segen.
+streift er durchs Land und bringt seinen Segen.
 Er ist bekannt bei jeder Menschenseele,
 drum schallt es laut aus jeder Kehle:
 
@@ -57,7 +57,7 @@ Hach, das Leben kann so schön sein.
 
 Der romantische Heinrich ist wieder im Lande.
 Verdreht die Köpfe aller Damen am Wegesrande.
-Verführt Herrin Stephanie, oder war's anders'rum?
+Verführt Herrin Stephanie, oder war's andersrum?
 Wen interessiert's am Ende, sei's drum.
 
 Sie im Arm zu halten, mit ihren Wangen zu schmusen.

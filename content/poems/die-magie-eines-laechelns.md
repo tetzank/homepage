@@ -3,7 +3,7 @@ title: "Die Magie eines Lächelns"
 date: 2020-02-10T19:50:50+01:00
 ---
 
-Ausgelaucht am spätem Abend,
+Ausgelaugt am spätem Abend,
 auf dem Heimweg langsam trabend,
 nichtsahnend, wie ein kleiner Bengel,
 begegne ich einen fremden Engel.
