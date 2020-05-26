@@ -2,7 +2,7 @@
 
 <main>
 	<div class="catalogue">
-		{{ range (.Paginate (where .Site.RegularPages "Section" "poems")).Pages }}
+		{{ range (.Paginate (where .Site.RegularPages "Section" "random")).Pages }}
 			<a href="{{ .Permalink }}" class="catalogue-item">
 				<div>
         			<h1 class="catalogue-title">{{ .Title }}</h1>
