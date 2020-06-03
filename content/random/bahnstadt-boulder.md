@@ -22,6 +22,10 @@ Einfach direkt bei der Verschneidung hoch und über das kleine Dach.
 {{< include "assets/includes/svg/directissima.svg" >}}
 
 __Hin und her__:
-In der Verschneidung auf halbe Höhe hoch und dann quer rüber mit den Untergriffen. Zur Ecke hoch und dann Hände oben drauf rechts rüber queren.
+In der Verschneidung auf halbe Höhe hoch und dann quer rüber mit den Untergriffen.
+Zur Ecke hoch und dann mit den Händen oben drauf rechts rüber queren.
 
 {{< include "assets/includes/svg/hin-und-her.svg" >}}
+
+Ausstiegsvariante:
+Anstatt die Hände oben drauf, kann man auch eine Reihe von Untergriffen unterhalb des schmalen Daches verwenden.
