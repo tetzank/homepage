@@ -1,0 +1,23 @@
+index: 5
+title: Efficient Compilation of Regular Path Queries
+authors:
+  - Frank Tetzel
+  - Wolfgang Lehner
+  - Romans Kasperovics
+conference: Datenbank-Spektrum
+year: 2020
+abstract: >
+  Ad hoc code generation is a state-of-the-art processing paradigm for database
+  execution engines. It minimizes resource consumption by generating
+  specialized code, tailored and streamlined for the single query at hand. In
+  this work, we apply ad hoc code generation to regular path queries (RPQs), an
+  advanced query type in declarative graph query languages. We investigate code
+  generation from multiple angles. We propose COAT, an embedded domain specific
+  language (EDSL) in C++ to improve accessibility of code generation by
+  simplifying the interaction with compiler APIs. Furthermore, we analyze and
+  compare two back ends for COAT providing the just-in-time (JIT) compilation
+  functionality: LLVM, a compiler framework popularly used in databases for
+  code generation, and AsmJit, a JIT assembler with very low compilation
+  latency. We evaluate various compilation techniques for RPQs on different
+  synthetic graph workloads.
+doi: 10.1007/s13222-020-00353-9
