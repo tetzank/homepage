@@ -10,17 +10,20 @@
 
 		<hr/>
 		<div>
-		{{ range sort $.Site.Data.publications "index" "desc" }}
+		{{- range sort $.Site.Data.publications "index" "desc" }}
+			{{- $bibauthors := delimit .authors " and " }}
+			{{- $bibtex := printf "@inproceedings{Tetzel-%d, author = { %s }, title = {{%s}}, year = %[1]d, doi = {%s} }" .year $bibauthors .title .doi }}
 			<div class="publication">
 				<h1>{{ .title }}</h1>
 				<p>{{ delimit .authors ", " }}</p>
 				<p>{{ .abstract }}</p>
 				<p>
 					{{ .conference }} {{ .year }},
-					DOI: <a href="https://doi.org/{{ .doi }}">[{{ .doi }}]</a>
+					DOI: <a href="https://doi.org/{{ .doi }}">[{{ .doi }}]</a>,
+					<a href="data:application/x-bibtex,{{ $bibtex }}" download="Tetzel-{{ .year }}.bib">[BibTeX]</a>
 				</p>
 			</div>
-		{{ end }}
+		{{- end }}
 		</div>
 	</article>
 </main>
