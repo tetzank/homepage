@@ -13,3 +13,19 @@ Ein Plätzchen, wo ich viel zu oft und viel zu lange hocke, bot sich direkt zum 
 </video>
 
 Und nicht vergessen: Immer schön die Tischplatte mit der Nase anstubsen!
+
+
+Einige Monate später...
+
+Erneut sind alle Kletterhallen geschlossen.
+Das ist in der kalten Jahreszeit besonders bitter, weil das Wetter selten einen Kletterausflug ins Freie zulässt.
+Da bin ich also wieder, und beklettere meinen Schreibtisch.
+Diesmal mit einer leicht verlängerten Übung.
+Für was so ein Kabelloch in der Tischplatte nicht alles gut sein kann.
+
+<video width="640" height="480" controls>
+<source src="/video/schreibtisch2.webm" type="video/webm" />
+</video>
+
+Eine volle Drehung links herum, und dann natürlich wieder rechts herum.
+Man will ja nicht verdreht durchs Leben gehen!
