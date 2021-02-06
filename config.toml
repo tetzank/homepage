@@ -4,3 +4,5 @@ title = "Dangerous Assembly"
 
 disableLiveReload = true
 disableHugoGeneratorInject = true
+
+Paginate = 20
