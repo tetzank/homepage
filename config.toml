@@ -6,3 +6,8 @@ disableLiveReload = true
 disableHugoGeneratorInject = true
 
 Paginate = 20
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
