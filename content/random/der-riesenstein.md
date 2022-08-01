@@ -5,7 +5,7 @@ date: 2022-05-30T15:14:08+02:00
 
 Das einzig Positive, was mir die Coronapandemie beschert hat, ist meine Bouldermatte.
 Die Kletterhallen waren geschlossen und das gab mir den letzten Arschtritt mir endlich eine solche Matte zu besorgen.
-Seitdem bin recht häufig am nahegelegenen Riesenstein anzustreffen und erfreue mich am Naturerlebnis in Stadtnähe.
+Seitdem bin ich recht häufig am nahegelegenen Riesenstein anzustreffen und erfreue mich am Naturerlebnis in Stadtnähe.
 
 Der Riesenstein ist ein ehemaliger, kleiner Steinbruch keine zehn Minuten hangaufwärts von der Heidelberger Altstadt.
 Das macht die Anreise mit ÖPNV recht bequem.
@@ -42,3 +42,10 @@ Mühe Klassik 6B:
 </video>
 
 Klettern bis in den Sonnenuntergang!
+
+Und der Superklassiker, den man als Erstes sieht, wenn man ankommt,
+Gorillahangel 6C:
+
+<video controls>
+<source src="/video/gorillahangel.mp4" type="video/mp4" />
+</video>
